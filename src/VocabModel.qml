@@ -2,31 +2,47 @@ import QtQuick 2.0
 
 ListModel {
     ListElement {
-        expression: "dog"
-        meaning: "собака"
+        expression: "Dog"
+        meaning: "Собака"
     }
     ListElement {
-        expression: "cat"
-        meaning: "кошка"
+        expression: "Cat"
+        meaning: "Кошка"
     }
     ListElement {
-        expression: "pillow"
-        meaning: "подушка"
+        expression: "Pillow"
+        meaning: "Подушка"
     }
     ListElement {
-        expression: "ground"
-        meaning: "земля"
+        expression: "Ground"
+        meaning: "Земля"
     }
     ListElement {
-        expression: "room"
-        meaning: "комната"
+        expression: "Room"
+        meaning: "Комната"
     }
     ListElement {
-        expression: "bridge"
-        meaning: "мост"
+        expression: "Иridge"
+        meaning: "Мост"
     }
     ListElement {
-        expression: "house"
-        meaning: "дом"
+        expression: "House"
+        meaning: "Дом"
+    }
+    ListElement {
+        expression: "Glass"
+        meaning: "Стакан"
+    }
+    ListElement {
+        expression: "Apple"
+        meaning: "Яблоко"
+    }
+    ListElement {
+        expression: "Chair"
+        meaning: "Стул"
+    }
+    ListElement {
+        expression: "Bread"
+        meaning: "Хлеб"
     }
 }

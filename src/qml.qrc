@@ -3,5 +3,8 @@
         <file>main.qml</file>
         <file>VocabModel.qml</file>
         <file>VocabListView.qml</file>
+        <file>VButton.qml</file>
+        <file>VTextField.qml</file>
+        <file>VPopup.qml</file>
     </qresource>
 </RCC>

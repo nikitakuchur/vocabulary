@@ -37,6 +37,5 @@ ListView {
             }
         }
     }
-    //highlight: Rectangle { color: "#e8e7e4" }
     focus: true
 }
