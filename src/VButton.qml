@@ -2,17 +2,21 @@ import QtQuick 2.13
 import QtQuick.Controls 2.12
 
 Button {
-    property real backgroundRadius: 4
+    id: root
+    property real backgroundRadius: 8
+    width: 40
+    height: 20
     contentItem: Text {
-        font.pointSize: 14
+        font.pixelSize: 0.4 * root.height
         color: "white"
-        text: parent.text
+        text: root.text
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: root.horizontalCenter
+        anchors.verticalCenter: root.verticalCenter
     }
     background: Rectangle {
+        id: background
         color: parent.pressed ?  "#008dbe" : "#2eaadc"
         radius: backgroundRadius
     }

@@ -13,9 +13,9 @@ ApplicationWindow {
     }
     VButton {
         text: "+"
-        width: 50
-        height: 50
-        backgroundRadius: 25
+        width: 0.1 * Math.max(window.width, window.height)
+        height: width
+        backgroundRadius: 0.5 * width
         anchors {
             right: parent.right
             bottom: parent.bottom
@@ -24,34 +24,28 @@ ApplicationWindow {
         }
         onClicked: addItemPopup.open()
     }
-
     VPopup {
         id: addItemPopup
+        width: window.width < window.height ?
+                   window.width - 20 : window.width / 2
         contentItem: ColumnLayout {
-            spacing: 8
-            Text {
-                font.pointSize: 10
-                color: "#aaa9a5"
-                text: "Expression:"
-            }
+            spacing: 0.02 * Math.max(window.width, window.height)
             VTextField {
                 id: expressionTextField
+                placeholderText: qsTr("New expression")
                 Layout.fillWidth: true
-            }
-            Text {
-                font.pointSize: 10
-                color: "#aaa9a5"
-                text: "Meaning:"
+                Layout.preferredHeight: 0.08 * Math.max(window.width, window.height)
             }
             VTextField {
                 id: meaningTextField
+                placeholderText: qsTr("New meaning")
                 Layout.fillWidth: true
+                Layout.preferredHeight: 0.08 * Math.max(window.width, window.height)
             }
             VButton {
-                text: "OK"
-                Layout.minimumHeight: 40
-                Layout.topMargin: 20
+                text: qsTr("OK")
                 Layout.fillWidth: true
+                Layout.preferredHeight: 0.08 * Math.max(window.width, window.height)
                 onClicked: {
                     listView.model.append({
                         expression: expressionTextField.text,

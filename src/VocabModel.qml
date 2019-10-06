@@ -22,7 +22,7 @@ ListModel {
         meaning: "Комната"
     }
     ListElement {
-        expression: "Иridge"
+        expression: "Bridge"
         meaning: "Мост"
     }
     ListElement {

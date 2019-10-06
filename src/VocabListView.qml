@@ -1,20 +1,20 @@
 import QtQuick 2.13
 
 ListView {
-    id: listView
+    id: root
     anchors.fill: parent
     model: VocabModel {}
     delegate: Item {
         id: item
-        width: parent.width; height: listView.height / 10
+        width: root.width; height: Math.max(root.width, root.height) / 12
         Rectangle {
-            width: parent.width
+            width: root.width
             height: 1
             color: "#dfdfde"
             anchors.bottom: parent.top
         }
         Rectangle {
-            width: parent.width
+            width: root.width
             height: 1
             color: "#dfdfde"
             anchors.bottom: parent.bottom
@@ -22,15 +22,15 @@ ListView {
         Row {
             anchors.verticalCenter: parent.verticalCenter
             Text {
-                width: item.width / 2
-                font.pointSize: 14
+                width: 0.5 * item.width
+                font.pixelSize: 0.4 * item.height
                 text: expression
                 elide: Text.ElideRight
                 leftPadding: 16
             }
             Text {
-                width: item.width / 2
-                font.pointSize: 14
+                width: 0.5 * item.width
+                font.pixelSize: 0.4 * item.height
                 text: meaning
                 elide: Text.ElideRight
                 leftPadding: 16
