@@ -7,6 +7,9 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
 
+    qmlRegisterSingletonType(QUrl("qrc:/utils/Units.qml"), "Units", 1, 0, "Units");
+    qmlRegisterSingletonType(QUrl("qrc:/utils/Style.qml"), "Style", 1, 0, "Style");
+
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

@@ -3,8 +3,11 @@
         <file>main.qml</file>
         <file>VocabModel.qml</file>
         <file>VocabListView.qml</file>
-        <file>VButton.qml</file>
-        <file>VTextField.qml</file>
-        <file>VPopup.qml</file>
+        <file>controls/Button.qml</file>
+        <file>controls/Popup.qml</file>
+        <file>controls/TextField.qml</file>
+        <file>utils/Style.qml</file>
+        <file>utils/Units.qml</file>
+        <file>controls/RoundButton.qml</file>
     </qresource>
 </RCC>

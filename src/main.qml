@@ -1,8 +1,11 @@
 import QtQuick 2.13
-import QtQuick.Controls 2.12
-import QtQuick.Layouts 1.12
+import QtQuick.Controls 2.13 as Controls
+import QtQuick.Layouts 1.13
+import Units 1.0
+import Style 1.0
+import "controls"
 
-ApplicationWindow {
+Controls.ApplicationWindow {
     id: window
     visible: true
     width: 1080 / 3
@@ -11,11 +14,9 @@ ApplicationWindow {
     VocabListView {
         id: listView
     }
-    VButton {
+    RoundButton {
         text: "+"
-        width: 0.1 * Math.max(window.width, window.height)
-        height: width
-        backgroundRadius: 0.5 * width
+        fontSize: Units.dp(60)
         anchors {
             right: parent.right
             bottom: parent.bottom
@@ -24,28 +25,28 @@ ApplicationWindow {
         }
         onClicked: addItemPopup.open()
     }
-    VPopup {
+    Popup {
         id: addItemPopup
         width: window.width < window.height ?
                    window.width - 20 : window.width / 2
         contentItem: ColumnLayout {
-            spacing: 0.02 * Math.max(window.width, window.height)
-            VTextField {
+            spacing: Units.dp(10)
+            TextField {
                 id: expressionTextField
                 placeholderText: qsTr("New expression")
                 Layout.fillWidth: true
-                Layout.preferredHeight: 0.08 * Math.max(window.width, window.height)
+                Layout.preferredHeight: Style.textField.height
             }
-            VTextField {
+            TextField {
                 id: meaningTextField
                 placeholderText: qsTr("New meaning")
                 Layout.fillWidth: true
-                Layout.preferredHeight: 0.08 * Math.max(window.width, window.height)
+                Layout.preferredHeight: Style.textField.height
             }
-            VButton {
+            Button {
                 text: qsTr("OK")
                 Layout.fillWidth: true
-                Layout.preferredHeight: 0.08 * Math.max(window.width, window.height)
+                Layout.preferredHeight: Style.button.height
                 onClicked: {
                     listView.model.append({
                         expression: expressionTextField.text,

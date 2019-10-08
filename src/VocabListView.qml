@@ -1,4 +1,5 @@
 import QtQuick 2.13
+import Style 1.0
 
 ListView {
     id: root
@@ -6,31 +7,31 @@ ListView {
     model: VocabModel {}
     delegate: Item {
         id: item
-        width: root.width; height: Math.max(root.width, root.height) / 12
+        width: root.width; height: Style.listView.itemHeight
         Rectangle {
             width: root.width
             height: 1
-            color: "#dfdfde"
+            color: Style.listView.borderColor
             anchors.bottom: parent.top
         }
         Rectangle {
             width: root.width
             height: 1
-            color: "#dfdfde"
+            color: Style.listView.borderColor
             anchors.bottom: parent.bottom
         }
         Row {
             anchors.verticalCenter: parent.verticalCenter
             Text {
                 width: 0.5 * item.width
-                font.pixelSize: 0.4 * item.height
+                font.pixelSize: Style.font.size
                 text: expression
                 elide: Text.ElideRight
                 leftPadding: 16
             }
             Text {
                 width: 0.5 * item.width
-                font.pixelSize: 0.4 * item.height
+                font.pixelSize: Style.font.size
                 text: meaning
                 elide: Text.ElideRight
                 leftPadding: 16
