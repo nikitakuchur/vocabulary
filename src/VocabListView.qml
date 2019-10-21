@@ -1,4 +1,4 @@
-import QtQuick 2.13
+import QtQuick 2.12
 import Style 1.0
 
 ListView {
