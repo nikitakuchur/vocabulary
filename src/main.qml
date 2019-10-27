@@ -1,9 +1,9 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
-import QtQuick.Layouts 1.12
 import Units 1.0
 import Style 1.0
 import "controls"
+import "views"
 
 Controls.ApplicationWindow {
     id: window
@@ -11,54 +11,36 @@ Controls.ApplicationWindow {
     width: 1080 / 3
     height: 1920 / 3
     title: qsTr("Vocabulary")
-    VocabListView {
-        id: listView
-    }
-    RoundButton {
-        text: "+"
-        fontSize: Units.dp(60)
-        anchors {
-            right: parent.right
-            bottom: parent.bottom
-            rightMargin: 10
-            bottomMargin: 10
-        }
-        onClicked: addItemPopup.open()
-    }
-    Popup {
-        id: addItemPopup
-        width: window.width < window.height ?
-                   window.width - 20 : window.width / 2
-        contentItem: ColumnLayout {
-            spacing: Units.dp(10)
-            TextField {
-                id: expressionTextField
-                placeholderText: qsTr("New expression")
-                Layout.fillWidth: true
-                Layout.preferredHeight: Style.textField.height
-            }
-            TextField {
-                id: meaningTextField
-                placeholderText: qsTr("New meaning")
-                Layout.fillWidth: true
-                Layout.preferredHeight: Style.textField.height
-            }
-            Button {
-                text: qsTr("OK")
-                Layout.fillWidth: true
-                Layout.preferredHeight: Style.button.height
-                onClicked: {
-                    listView.model.append({
-                        expression: expressionTextField.text,
-                        meaning: meaningTextField.text
-                    })
-                    addItemPopup.close()
-                }
+    header: Controls.ToolBar {
+        id: toolBar
+        height: Style.toolBar.height
+        Row {
+            anchors.fill: parent
+            Controls.ToolButton {
+                text: stack.currentItem == mainView ? "⋮" : "‹"
+                font.pixelSize: Units.dp(32)
+                height: toolBar.height
+                width: height
+                onClicked: stack.pop()
             }
         }
-        onClosed: {
-            expressionTextField.text = ""
-            meaningTextField.text = ""
+    }
+    Controls.StackView {
+        id: stack
+        initialItem: mainView
+        anchors.fill: parent
+    }
+    MainView {
+        id: mainView
+    }
+    ItemView {
+        id: itemView
+        visible: false
+    }
+    onClosing: {
+        if (stack.currentItem != mainView) {
+            close.accepted = false
+            stack.pop()
         }
     }
 }

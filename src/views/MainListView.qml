@@ -1,24 +1,23 @@
 import QtQuick 2.12
+import Units 1.0
 import Style 1.0
+import "../controls"
 
 ListView {
     id: root
     anchors.fill: parent
-    model: VocabModel {}
+    model: MainModel {}
     delegate: Item {
         id: item
         width: root.width; height: Style.listView.itemHeight
-        Rectangle {
+        Line {
             width: root.width
-            height: 1
             color: Style.listView.borderColor
             anchors.bottom: parent.top
         }
         Rectangle {
-            width: root.width
-            height: 1
-            color: Style.listView.borderColor
-            anchors.bottom: parent.bottom
+            anchors.fill: parent
+            color: mouseArea.pressed ? Style.listView.pressedColor : Style.listView.color
         }
         Row {
             anchors.verticalCenter: parent.verticalCenter
@@ -27,14 +26,21 @@ ListView {
                 font.pixelSize: Style.font.size
                 text: expression
                 elide: Text.ElideRight
-                leftPadding: 16
+                leftPadding: Units.dp(16)
             }
             Text {
                 width: 0.5 * item.width
                 font.pixelSize: Style.font.size
                 text: meaning
                 elide: Text.ElideRight
-                leftPadding: 16
+                leftPadding: Units.dp(16)
+            }
+        }
+        MouseArea {
+            id: mouseArea
+            anchors.fill: parent
+            onClicked: {
+                stack.push(itemView, { "expression": expression, "meaning": meaning })
             }
         }
     }

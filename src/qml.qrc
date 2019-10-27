@@ -1,13 +1,16 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>VocabModel.qml</file>
-        <file>VocabListView.qml</file>
         <file>controls/Button.qml</file>
         <file>controls/Popup.qml</file>
         <file>controls/TextField.qml</file>
         <file>utils/Style.qml</file>
         <file>utils/Units.qml</file>
         <file>controls/RoundButton.qml</file>
+        <file>views/ItemView.qml</file>
+        <file>views/MainListView.qml</file>
+        <file>views/MainModel.qml</file>
+        <file>views/MainView.qml</file>
+        <file>controls/Line.qml</file>
     </qresource>
 </RCC>
