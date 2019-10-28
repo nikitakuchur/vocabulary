@@ -22,7 +22,7 @@ QtObject {
     }
 
     property QtObject rectangle: QtObject {
-        property real radius: Units.dp(12)
+        property real radius: Units.dp(8)
     }
 
     property QtObject button: QtObject {

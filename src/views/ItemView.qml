@@ -5,8 +5,8 @@ import Style 1.0
 import "../controls"
 
 Item {
-    property string expression
-    property string meaning
+    property string expression: ""
+    property variant meanings: [""]
     id: root
     visible: true
     Column {
@@ -33,10 +33,27 @@ Item {
             padding: Units.dp(16)
             bottomPadding: 0
         }
-        Controls.Label {
-            text: meaning
-            font.pixelSize: Style.font.size
-            padding: Units.dp(16)
+        Repeater {
+            model: meanings
+            Controls.Label {
+                text: modelData
+                font.pixelSize: Style.font.size
+                padding: Units.dp(16)
+                bottomPadding: 0
+            }
+        }
+    }
+    RoundButton {
+        text: "Edit"
+        fontSize: Style.font.size
+        anchors {
+            right: parent.right
+            bottom: parent.bottom
+            rightMargin: 10
+            bottomMargin: 10
+        }
+        onClicked: {
+            console.log("edit")
         }
     }
 }

@@ -31,7 +31,7 @@ ListView {
             Text {
                 width: 0.5 * item.width
                 font.pixelSize: Style.font.size
-                text: meaning
+                text: meanings.get(0).meaning
                 elide: Text.ElideRight
                 leftPadding: Units.dp(16)
             }
@@ -40,8 +40,15 @@ ListView {
             id: mouseArea
             anchors.fill: parent
             onClicked: {
-                stack.push(itemView, { "expression": expression, "meaning": meaning })
+                stack.push(itemView, { "expression": expression, "meanings": getMeaningArray(meanings) })
             }
+        }
+        function getMeaningArray(meanings) {
+            var array = [];
+            for (var index = 0; index < meanings.count; index++) {
+                array.push(meanings.get(index).meaning)
+            }
+            return array;
         }
     }
     focus: true

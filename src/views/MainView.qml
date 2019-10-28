@@ -11,8 +11,8 @@ Item {
         id: listView
     }
     RoundButton {
-        text: "+"
-        fontSize: Units.dp(40)
+        text: "New"
+        fontSize: Style.font.size
         anchors {
             right: parent.right
             bottom: parent.bottom
@@ -48,7 +48,7 @@ Item {
                 onClicked: {
                     listView.model.append({
                         expression: expressionTextField.text,
-                        meaning: meaningTextField.text
+                        meanings: [{ meaning: meaningTextField.text }]
                     })
                     addItemPopup.close()
                 }
