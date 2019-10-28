@@ -1,9 +1,11 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
 import QtQuick.Layouts 1.12
+import QtQuick.LocalStorage 2.12
 import Units 1.0
 import Style 1.0
 import "../controls"
+import "../utils/Database.js" as DB
 
 Item {
     id: mainView
@@ -46,7 +48,9 @@ Item {
                 Layout.fillWidth: true
                 Layout.preferredHeight: Style.button.height
                 onClicked: {
+                    var rowid = parseInt(DB.insert(expressionTextField.text, [meaningTextField.text]))
                     listView.model.append({
+                        id: rowid,
                         expression: expressionTextField.text,
                         meanings: [{ meaning: meaningTextField.text }]
                     })

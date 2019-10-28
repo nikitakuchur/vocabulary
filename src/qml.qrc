@@ -12,5 +12,6 @@
         <file>views/MainModel.qml</file>
         <file>views/MainView.qml</file>
         <file>controls/Line.qml</file>
+        <file>utils/Database.js</file>
     </qresource>
 </RCC>

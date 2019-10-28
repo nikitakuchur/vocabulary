@@ -1,15 +1,21 @@
 import QtQuick 2.12
+import QtQuick.LocalStorage 2.12
 import Units 1.0
 import Style 1.0
 import "../controls"
+import "../utils/Database.js" as DB
 
 ListView {
     id: root
     anchors.fill: parent
-    model: MainModel {}
+    model: ListModel {
+        id: listModel
+        Component.onCompleted: DB.readAll()
+    }
     delegate: Item {
         id: item
-        width: root.width; height: Style.listView.itemHeight
+        width: root.width
+        height: Style.listView.itemHeight
         Line {
             width: root.width
             color: Style.listView.borderColor

@@ -1,9 +1,11 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
+import QtQuick.LocalStorage 2.12
 import Units 1.0
 import Style 1.0
 import "controls"
 import "views"
+import "utils/Database.js" as DB
 
 Controls.ApplicationWindow {
     id: window
@@ -43,4 +45,5 @@ Controls.ApplicationWindow {
             stack.pop()
         }
     }
+    Component.onCompleted: DB.init()
 }
