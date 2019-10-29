@@ -8,13 +8,11 @@ import "../controls"
 import "../utils/Database.js" as DB
 
 Item {
-    id: mainView
     MainListView {
         id: listView
     }
     RoundButton {
-        text: "New"
-        fontSize: Style.font.size
+        text: qsTr("New")
         anchors {
             right: parent.right
             bottom: parent.bottom

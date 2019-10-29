@@ -5,5 +5,5 @@ Button {
     width: Style.roundButton.width
     height: width
     fontSize: Style.font.size
-    backgroundRadius: 0.5 * width
+    radius: 0.5 * width
 }

@@ -39,6 +39,10 @@ Controls.ApplicationWindow {
         id: itemView
         visible: false
     }
+    EditItemView {
+        id: editItemView
+        visible: false
+    }
     onClosing: {
         if (stack.currentItem != mainView) {
             close.accepted = false

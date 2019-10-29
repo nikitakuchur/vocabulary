@@ -4,11 +4,13 @@ import Style 1.0
 
 Controls.Button {
     id: root
-    property int fontSize: Style.font.size
-    property real backgroundRadius: Style.rectangle.radius
+    property alias fontSize: content.font.pixelSize
+    property alias radius: background.radius
+    property color defaultColor: Style.button.blueColor
     contentItem: Text {
-        font.pixelSize: fontSize
+        id: content
         color: Style.button.textColor
+        font.pixelSize: Style.font.size
         text: root.text
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
@@ -17,7 +19,9 @@ Controls.Button {
     }
     background: Rectangle {
         id: background
-        color: parent.pressed ? Style.button.pressedColor : Style.button.color
-        radius: backgroundRadius
+        color: parent.pressed ?
+                   Qt.rgba(defaultColor.r - 0.1, defaultColor.g - 0.1, defaultColor.b - 0.1, 1) :
+                   defaultColor
+        radius: Style.rectangle.radius
     }
 }

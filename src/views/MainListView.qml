@@ -17,8 +17,7 @@ ListView {
         width: root.width
         height: Style.listView.itemHeight
         Line {
-            width: root.width
-            color: Style.listView.borderColor
+            width: parent.width
             anchors.bottom: parent.top
         }
         Rectangle {
@@ -46,7 +45,7 @@ ListView {
             id: mouseArea
             anchors.fill: parent
             onClicked: {
-                stack.push(itemView, { "expression": expression, "meanings": getMeaningArray(meanings) })
+                stack.push(itemView, { "id": id, "expression": expression, "meanings": getMeaningArray(meanings) })
             }
         }
         function getMeaningArray(meanings) {

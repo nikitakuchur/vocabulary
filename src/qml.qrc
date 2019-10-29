@@ -9,9 +9,9 @@
         <file>controls/RoundButton.qml</file>
         <file>views/ItemView.qml</file>
         <file>views/MainListView.qml</file>
-        <file>views/MainModel.qml</file>
         <file>views/MainView.qml</file>
         <file>controls/Line.qml</file>
         <file>utils/Database.js</file>
+        <file>views/EditItemView.qml</file>
     </qresource>
 </RCC>
