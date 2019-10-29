@@ -36,7 +36,7 @@ Item {
         Repeater {
             model: meanings
             Controls.Label {
-                text: modelData
+                text: meanings.length > 1 ? "•  " + modelData : modelData
                 font.pixelSize: Style.font.size
                 padding: Units.dp(16)
                 bottomPadding: 0
