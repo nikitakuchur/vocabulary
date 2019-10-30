@@ -44,7 +44,7 @@ function readAll()
             for (var val of meaningsArr) {
                 meanings.push({ meaning: val });
             }
-            listModel.append({
+            model.append({
                                  id: results.rows.item(i).rowid,
                                  expression: results.rows.item(i).expression,
                                  meanings: meanings

@@ -7,9 +7,11 @@ import "../controls"
 import "../utils/Database.js" as DB
 
 Item {
+    property int index
     property string id
     property string expression: ""
     property variant meanings: [""]
+
     id: root
     visible: true
     Column {
@@ -55,9 +57,9 @@ Item {
         }
         onClicked: {
             DB.deleteRow(id)
+            mainView.model.remove(index)
             stack.pop()
             stack.pop()
-            // TODO: delete item from model
         }
     }
     RoundButton {

@@ -8,10 +8,6 @@ import "../utils/Database.js" as DB
 ListView {
     id: root
     anchors.fill: parent
-    model: ListModel {
-        id: listModel
-        Component.onCompleted: DB.readAll()
-    }
     delegate: Item {
         id: item
         width: root.width
@@ -45,7 +41,7 @@ ListView {
             id: mouseArea
             anchors.fill: parent
             onClicked: {
-                stack.push(itemView, { "id": id, "expression": expression, "meanings": getMeaningArray(meanings) })
+                stack.push(itemView, { "index": index, "id": id, "expression": expression, "meanings": getMeaningArray(meanings) })
             }
         }
         function getMeaningArray(meanings) {

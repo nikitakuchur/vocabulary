@@ -5,9 +5,11 @@ import Style 1.0
 import "../controls"
 
 Item {
+    property int index
     property int id
     property string expression: ""
     property variant meanings: [""]
+
     id: root
     visible: true
     Column {
@@ -50,7 +52,7 @@ Item {
             bottomMargin: 10
         }
         onClicked: {
-            stack.push(editItemView, { "id": id, "expression": expression, "meanings": meanings })
+            stack.push(editItemView, { "index": index, "id": id, "expression": expression, "meanings": meanings })
         }
     }
 }

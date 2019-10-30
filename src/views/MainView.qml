@@ -8,8 +8,15 @@ import "../controls"
 import "../utils/Database.js" as DB
 
 Item {
+    property alias model: model
+
+    ListModel {
+        id: model
+        Component.onCompleted: DB.readAll()
+    }
     MainListView {
         id: listView
+        model: model
     }
     RoundButton {
         text: qsTr("New")
@@ -47,7 +54,7 @@ Item {
                 Layout.preferredHeight: Style.button.height
                 onClicked: {
                     var rowid = parseInt(DB.insert(expressionTextField.text, [meaningTextField.text]))
-                    listView.model.append({
+                    model.append({
                         id: rowid,
                         expression: expressionTextField.text,
                         meanings: [{ meaning: meaningTextField.text }]
