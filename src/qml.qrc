@@ -7,11 +7,11 @@
         <file>utils/Style.qml</file>
         <file>utils/Units.qml</file>
         <file>controls/RoundButton.qml</file>
-        <file>views/ItemView.qml</file>
-        <file>views/MainListView.qml</file>
-        <file>views/MainView.qml</file>
         <file>controls/Line.qml</file>
         <file>utils/Database.js</file>
-        <file>views/EditItemView.qml</file>
+        <file>pages/EditItemPage.qml</file>
+        <file>pages/ItemPage.qml</file>
+        <file>pages/MainListView.qml</file>
+        <file>pages/MainPage.qml</file>
     </qresource>
 </RCC>

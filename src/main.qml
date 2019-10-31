@@ -4,7 +4,7 @@ import QtQuick.LocalStorage 2.12
 import Units 1.0
 import Style 1.0
 import "controls"
-import "views"
+import "pages"
 import "utils/Database.js" as DB
 
 Controls.ApplicationWindow {
@@ -19,7 +19,7 @@ Controls.ApplicationWindow {
         Row {
             anchors.fill: parent
             Controls.ToolButton {
-                text: stack.currentItem == mainView ? "⋮" : "‹"
+                text: stack.currentItem == mainPage ? "⋮" : "‹"
                 font.pixelSize: Units.dp(32)
                 height: toolBar.height
                 width: height
@@ -29,22 +29,14 @@ Controls.ApplicationWindow {
     }
     Controls.StackView {
         id: stack
-        initialItem: mainView
+        initialItem: mainPage
         anchors.fill: parent
     }
-    MainView {
-        id: mainView
-    }
-    ItemView {
-        id: itemView
-        visible: false
-    }
-    EditItemView {
-        id: editItemView
-        visible: false
+    MainPage {
+        id: mainPage
     }
     onClosing: {
-        if (stack.currentItem != mainView) {
+        if (stack.currentItem != mainPage) {
             close.accepted = false
             stack.pop()
         }

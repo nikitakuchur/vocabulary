@@ -6,34 +6,40 @@ import "../controls"
 
 Item {
     id: root
-    Column {
-        Controls.Label {
-            text: "Expression"
-            font.pixelSize: Style.smallFont.size
-            color: Style.smallFont.color
-            padding: Units.dp(16)
-            bottomPadding: 0
-        }
-        Controls.Label {
-            text: expression
-            font.pixelSize: Style.font.size
-            padding: Units.dp(16)
-        }
-        Line { width: root.width }
-        Controls.Label {
-            text: "Meaning"
-            font.pixelSize: Style.smallFont.size
-            color: Style.smallFont.color
-            padding: Units.dp(16)
-            bottomPadding: 0
-        }
-        Repeater {
-            model: meanings
+    Flickable {
+        anchors.fill: parent
+        contentHeight: column.height + parent.height / 2
+        Controls.ScrollBar.vertical: Controls.ScrollBar { }
+        Column {
+            id: column
             Controls.Label {
-                text: meanings.count > 1 ? "•  " + modelData : modelData
-                font.pixelSize: Style.font.size
+                text: "Expression"
+                font.pixelSize: Style.smallFont.size
+                color: Style.smallFont.color
                 padding: Units.dp(16)
                 bottomPadding: 0
+            }
+            Controls.Label {
+                text: expression
+                font.pixelSize: Style.font.size
+                padding: Units.dp(16)
+            }
+            Line { width: root.width }
+            Controls.Label {
+                text: "Meaning"
+                font.pixelSize: Style.smallFont.size
+                color: Style.smallFont.color
+                padding: Units.dp(16)
+                bottomPadding: 0
+            }
+            Repeater {
+                model: meanings
+                Controls.Label {
+                    text: meanings.count > 1 ? "•  " + modelData : modelData
+                    font.pixelSize: Style.font.size
+                    padding: Units.dp(16)
+                    bottomPadding: 0
+                }
             }
         }
     }

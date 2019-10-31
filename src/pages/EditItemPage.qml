@@ -8,46 +8,57 @@ import "../utils/Database.js" as DB
 
 Item {
     id: root
-    Column {
-        spacing: Units.dp(16)
-        Controls.Label {
-            text: "Expression"
-            font.pixelSize: Style.smallFont.size
-            color: Style.smallFont.color
-            padding: Units.dp(16)
-            bottomPadding: 0
-        }
-        TextField {
-            id: expressionTextField
-            text: expression
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: Units.dp(16)
-        }
-        Line { width: root.width }
-        Controls.Label {
-            text: "Meaning"
-            font.pixelSize: Style.smallFont.size
-            color: Style.smallFont.color
-            leftPadding: Units.dp(16)
-        }
-        Repeater {
-            id: repeater
-            model: meanings
+    Flickable {
+        anchors.fill: parent
+        contentHeight: column.height + parent.height / 2
+        Controls.ScrollBar.vertical: Controls.ScrollBar { }
+        Column {
+            id: column
+            spacing: Units.dp(16)
+            Controls.Label {
+                text: "Expression"
+                font.pixelSize: Style.smallFont.size
+                color: Style.smallFont.color
+                padding: Units.dp(16)
+                bottomPadding: 0
+            }
             TextField {
-                text: meanings.get(index).meaning
+                id: expressionTextField
+                text: expression
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.margins: Units.dp(16)
             }
-        }
-        Button {
-            text: "Add meaning"
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.margins: Units.dp(16)
-            onClicked: {
-                meanings.append({ meaning: "" });
+            Line { width: root.width }
+            Controls.Label {
+                text: "Meaning"
+                font.pixelSize: Style.smallFont.size
+                color: Style.smallFont.color
+                leftPadding: Units.dp(16)
+            }
+            Repeater {
+                id: repeater
+                model: ListModel { id:m }
+                TextField {
+                    text: modelData
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    anchors.margins: Units.dp(16)
+                }
+                Component.onCompleted: {
+                    for (var i = 0; i < meanings.count; i++) {
+                        model.append({ meaning: meanings.get(i).meaning })
+                    }
+                }
+            }
+            Button {
+                text: "Add meaning"
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.margins: Units.dp(16)
+                onClicked: {
+                    repeater.model.append({ meaning: "" });
+                }
             }
         }
     }
@@ -76,9 +87,12 @@ Item {
             bottomMargin: 10
         }
         onClicked: {
-            DB.update(id, expressionTextField.text, meanings);
             expression = expressionTextField.text;
-            meanings = [{ meaning: "hello" }];
+            meanings.clear();
+            for (var i = 0; i < repeater.count; i++) {
+                meanings.append({ meaning: repeater.itemAt(i).text });
+            }
+            DB.update(id, expression, meanings);
             stack.pop();
         }
     }

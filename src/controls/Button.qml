@@ -3,10 +3,12 @@ import QtQuick.Controls 2.12 as Controls
 import Style 1.0
 
 Controls.Button {
-    id: root
     property alias fontSize: content.font.pixelSize
     property alias radius: background.radius
     property color defaultColor: Style.button.blueColor
+
+    id: root
+    height: Style.button.height
     contentItem: Text {
         id: content
         color: Style.button.textColor

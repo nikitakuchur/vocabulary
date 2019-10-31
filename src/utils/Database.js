@@ -22,32 +22,27 @@ function getHandle()
 
 function insert(expression, meanings)
 {
-    var meaningsStr = meanings.join('__,__');
     var db = getHandle();
     var rowid = 0;
     db.transaction(function (tx) {
-        tx.executeSql('INSERT INTO vocabulary VALUES(?, ?)', [expression, meaningsStr]);
+        tx.executeSql('INSERT INTO vocabulary VALUES(?, ?)', [expression, meaningsToString(meanings)]);
         var result = tx.executeSql('SELECT last_insert_rowid()');
         rowid = result.insertId;
     })
     return rowid;
 }
 
-function readAll()
+function readAll(model)
 {
+    model.clear();
     var db = getHandle()
     db.transaction(function (tx) {
         var results = tx.executeSql('SELECT rowid, expression, meanings FROM vocabulary ORDER BY rowid DESC');
         for (var i = 0; i < results.rows.length; i++) {
-            var meaningsArr = results.rows.item(i).meanings.split('__,__');
-            var meanings = []
-            for (var val of meaningsArr) {
-                meanings.push({ meaning: val });
-            }
             model.append({
                                  id: results.rows.item(i).rowid,
                                  expression: results.rows.item(i).expression,
-                                 meanings: meanings
+                                 meanings: stringToMeanings(results.rows.item(i).meanings)
                              });
         }
     });
@@ -55,10 +50,9 @@ function readAll()
 
 function update(rowid, expression, meanings)
 {
-    var meaningsStr = meanings.join('__,__');
-    var db = dbGetHandle();
+    var db = getHandle();
     db.transaction(function (tx) {
-        tx.executeSql('UPDATE vocabulary SET expression = ?, meanings = ? WHERE rowid = ?', [expression, meaningsStr, rowid]);
+        tx.executeSql('UPDATE vocabulary SET expression = ?, meanings = ? WHERE rowid = ?', [expression, meaningsToString(meanings), rowid]);
     })
 }
 
@@ -68,4 +62,23 @@ function deleteRow(rowid)
     db.transaction(function (tx) {
         tx.executeSql('DELETE FROM vocabulary WHERE rowid = ?', [rowid]);
     });
+}
+
+function meaningsToString(meanings) {
+    var str = "";
+    var separator = '__,__'
+    for (var i = 0; i < meanings.count; i++) {
+        str += meanings.get(i).meaning + separator;
+    }
+    str = str.slice(0, -separator.length);
+    return str;
+}
+
+function stringToMeanings(str) {
+    var array = str.split('__,__');
+    var meanings = [];
+    for (var val of array) {
+        meanings.push({ meaning: val });
+    }
+    return meanings;
 }

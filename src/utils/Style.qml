@@ -29,7 +29,7 @@ QtObject {
         property int height: Units.dp(46)
         property color textColor: "white"
         property color blueColor: "#2eaadc"
-        property color redColor: "red"
+        property color redColor: "#e96675"
     }
 
     property QtObject roundButton: QtObject {
