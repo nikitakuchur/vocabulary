@@ -35,10 +35,16 @@ Item {
             Repeater {
                 model: meanings
                 Controls.Label {
+                    id: meaningsLabel
                     text: meanings.count > 1 ? "•  " + modelData : modelData
                     font.pixelSize: Style.font.size
                     padding: Units.dp(16)
                     bottomPadding: 0
+                    onVisibleChanged: {
+                        if(visible) {
+                            text = modelData
+                        }
+                    }
                 }
             }
         }

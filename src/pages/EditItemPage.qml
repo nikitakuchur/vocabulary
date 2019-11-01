@@ -104,9 +104,12 @@ Item {
         }
         onClicked: {
             expression = expressionTextField.text;
-            meanings.clear();
-            for (var i = 0; i < repeater.count; i++) {
-                meanings.append({ meaning: repeater.itemAt(i).text })
+            for (var i = 0; i < Math.max(meanings.count, repeater.count); i++) {
+                if (i < repeater.count) {
+                    meanings.set(i, { meaning: repeater.itemAt(i).text });
+                } else {
+                    meanings.remove(i);
+                }
             }
             DB.update(id, expression, meanings);
             stack.pop();

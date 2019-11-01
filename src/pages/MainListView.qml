@@ -49,10 +49,5 @@ ListView {
             id: itemPage
             visible: false
         }
-        onVisibleChanged: {
-            if (visible) {
-                meaningText.text = meanings.get(0).meaning
-            }
-        }
     }
 }
