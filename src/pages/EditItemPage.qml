@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
+import QtQuick.Layouts 1.12
 import QtQuick.LocalStorage 2.12
 import Units 1.0
 import Style 1.0
@@ -38,12 +39,27 @@ Item {
             }
             Repeater {
                 id: repeater
-                model: ListModel { id:m }
-                TextField {
-                    text: modelData
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.margins: Units.dp(16)
+                model: ListModel { }
+                RowLayout {
+                    property alias text: meaningTextField.text
+                    width: root.width
+                    TextField {
+                        id: meaningTextField
+                        text: modelData
+                        Layout.fillWidth: true
+                        Layout.leftMargin: Units.dp(16)
+                        Layout.rightMargin: repeater.count > 1 ? 0 : Units.dp(16)
+                    }
+                    Button {
+                        visible: repeater.count > 1
+                        text: qsTr("-")
+                        Layout.preferredWidth: height
+                        Layout.rightMargin: Units.dp(16)
+                        defaultColor: Style.button.redColor
+                        onClicked: {
+                            repeater.model.remove(index);
+                        }
+                    }
                 }
                 Component.onCompleted: {
                     for (var i = 0; i < meanings.count; i++) {
@@ -90,7 +106,7 @@ Item {
             expression = expressionTextField.text;
             meanings.clear();
             for (var i = 0; i < repeater.count; i++) {
-                meanings.append({ meaning: repeater.itemAt(i).text });
+                meanings.append({ meaning: repeater.itemAt(i).text })
             }
             DB.update(id, expression, meanings);
             stack.pop();

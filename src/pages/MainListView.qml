@@ -30,6 +30,7 @@ ListView {
                 leftPadding: Units.dp(16)
             }
             Text {
+                id: meaningText
                 width: 0.5 * item.width
                 font.pixelSize: Style.font.size
                 text: meanings.get(0).meaning
@@ -47,6 +48,11 @@ ListView {
         ItemPage {
             id: itemPage
             visible: false
+        }
+        onVisibleChanged: {
+            if (visible) {
+                meaningText.text = meanings.get(0).meaning
+            }
         }
     }
 }
