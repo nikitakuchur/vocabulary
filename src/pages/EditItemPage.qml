@@ -79,7 +79,7 @@ Item {
         }
     }
     RoundButton {
-        text: qsTr("Delete")
+        text: qsTr("X")
         defaultColor: Style.button.redColor
         anchors {
             left: parent.left

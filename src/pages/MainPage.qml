@@ -21,7 +21,7 @@ Item {
         model: listModel
     }
     RoundButton {
-        text: qsTr("New")
+        text: qsTr("+")
         anchors {
             right: parent.right
             bottom: parent.bottom
