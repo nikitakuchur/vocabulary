@@ -1,7 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
 import QtQuick.LocalStorage 2.12
-import QtQuick.Controls.Material 2.12
 import Units 1.0
 import Style 1.0
 import "controls"
@@ -17,15 +16,20 @@ Controls.ApplicationWindow {
     header: Controls.ToolBar {
         id: toolBar
         height: Style.toolBar.height
-        Material.background: Material.Red
         Row {
             anchors.fill: parent
             Controls.ToolButton {
-                text: stack.currentItem == mainPage ? "⋮" : "‹"
+                text: stack.depth > 1 ? "‹" : "⋮"
                 font.pixelSize: Units.dp(32)
                 height: toolBar.height
                 width: height
-                onClicked: stack.pop()
+                onClicked: {
+                    if (stack.depth > 1) {
+                        stack.pop()
+                    } else {
+                        drawer.open()
+                    }
+                }
             }
         }
     }
@@ -36,6 +40,41 @@ Controls.ApplicationWindow {
     }
     MainPage {
         id: mainPage
+    }
+
+    Controls.Drawer {
+        id: drawer
+        width: Math.min(window.width, window.height) / 3 * 2
+        height: window.height
+        interactive: stack.depth === 1
+
+        ListView {
+            id: listView
+
+            focus: true
+            currentIndex: -1
+            anchors.fill: parent
+
+            delegate: Controls.ItemDelegate {
+                width: parent.width
+                text: model.title
+                font.pixelSize: Style.font.size
+                highlighted: ListView.isCurrentItem
+                onClicked: {
+                    listView.currentIndex = index;
+                    //stack.push(model.source);
+                    drawer.close();
+                }
+            }
+
+            model: ListModel {
+                ListElement { title: "Dictionary"; source: "" }
+                ListElement { title: "Quizzes"; source: "" }
+                ListElement { title: "About"; source: "" }
+            }
+
+            Controls.ScrollIndicator.vertical: Controls.ScrollIndicator { }
+        }
     }
     onClosing: {
         if (stack.depth > 1) {
