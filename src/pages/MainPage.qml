@@ -16,10 +16,12 @@ Controls.Page {
             DB.readAll(listModel);
         }
     }
+
     MainListView {
         id: listView
         model: listModel
     }
+
     RoundButton {
         text: qsTr("+")
         anchors {
@@ -32,6 +34,7 @@ Controls.Page {
             stack.push(dddItemPage);
         }
     }
+
     AddItemPage {
         id: dddItemPage
         visible: false

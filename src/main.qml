@@ -33,11 +33,13 @@ Controls.ApplicationWindow {
             }
         }
     }
+
     Controls.StackView {
         id: stack
         initialItem: mainPage
         anchors.fill: parent
     }
+
     MainPage {
         id: mainPage
     }
@@ -76,11 +78,13 @@ Controls.ApplicationWindow {
             Controls.ScrollIndicator.vertical: Controls.ScrollIndicator { }
         }
     }
+
     onClosing: {
         if (stack.depth > 1) {
             close.accepted = false;
             stack.pop();
         }
     }
+
     Component.onCompleted: DB.init()
 }

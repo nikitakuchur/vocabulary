@@ -9,6 +9,7 @@ Controls.Button {
 
     id: root
     height: Style.button.height
+
     contentItem: Text {
         id: content
         color: Style.button.textColor
@@ -19,6 +20,7 @@ Controls.Button {
         anchors.horizontalCenter: root.horizontalCenter
         anchors.verticalCenter: root.verticalCenter
     }
+
     background: Rectangle {
         id: background
         color: parent.pressed ?

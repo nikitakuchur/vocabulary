@@ -9,15 +9,18 @@ import "../utils/Database.js" as DB
 
 EditableItemPage {
     expressionText: expression
+
     RoundButton {
         text: qsTr("X")
         defaultColor: Style.button.redColor
+
         anchors {
             left: parent.left
             bottom: parent.bottom
             leftMargin: 10
             bottomMargin: 10
         }
+
         onClicked: {
             DB.deleteRow(id);
             listModel.clear();
@@ -25,6 +28,7 @@ EditableItemPage {
             stack.pop(mainPage);
         }
     }
+
     onSaveButtonClicked: {
         expression = expressionText;
         var count = Math.max(meanings.count, meaningList.count);
@@ -40,6 +44,7 @@ EditableItemPage {
         DB.update(id, expression, meanings);
         stack.pop();
     }
+
     Component.onCompleted: {
         meaningList.clear();
         for (var i = 0; i < meanings.count; i++) {
