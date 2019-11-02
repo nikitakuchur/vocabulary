@@ -4,7 +4,7 @@ import Units 1.0
 import Style 1.0
 import "../controls"
 
-Item {
+Controls.Page {
     id: root
     Flickable {
         anchors.fill: parent
@@ -40,7 +40,7 @@ Item {
                     bottomPadding: 0
                     onVisibleChanged: {
                         if(visible) {
-                            text = meanings.count > 1 ? "•  " + modelData : modelData
+                            text = meanings.count > 1 ? "•  " + modelData : modelData;
                         }
                     }
                 }
@@ -56,7 +56,7 @@ Item {
             bottomMargin: 10
         }
         onClicked: {
-            stack.push(editItemPage)
+            stack.push(editItemPage);
         }
     }
     EditItemPage {

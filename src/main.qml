@@ -38,7 +38,7 @@ Controls.ApplicationWindow {
         id: mainPage
     }
     onClosing: {
-        if (stack.currentItem != mainPage) {
+        if (stack.depth > 1) {
             close.accepted = false;
             stack.pop();
         }

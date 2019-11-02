@@ -7,7 +7,7 @@ import Style 1.0
 import "../controls"
 import "../utils/Database.js" as DB
 
-Item {
+Controls.Page {
     property alias expressionText: expressionTextField.text
     property ListModel meaningList: ListModel { ListElement { meaning: "" }}
     signal saveButtonClicked()
