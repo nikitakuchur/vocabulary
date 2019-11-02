@@ -27,9 +27,6 @@ QtObject {
 
     property QtObject button: QtObject {
         property int height: Units.dp(46)
-        property color textColor: "white"
-        property color blueColor: "#2eaadc"
-        property color redColor: "#e96675"
     }
 
     property QtObject roundButton: QtObject {
@@ -38,14 +35,9 @@ QtObject {
 
     property QtObject textField: QtObject {
         property int height: Units.dp(46)
-        property color color: "#f7f7f5"
-        property color borderColor: "#cfcfcd"
     }
 
     property QtObject listView: QtObject {
         property int itemHeight: Units.dp(64)
-        property color color: "white"
-        property color borderColor: "#dfdfde"
-        property color pressedColor: "#dfdede"
     }
 }

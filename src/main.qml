@@ -13,16 +13,20 @@ Controls.ApplicationWindow {
     width: 360
     height: 640
     title: qsTr("Vocabulary")
+
     header: Controls.ToolBar {
         id: toolBar
         height: Style.toolBar.height
+
         Row {
             anchors.fill: parent
+
             Controls.ToolButton {
                 text: stack.depth > 1 ? "‹" : "⋮"
                 font.pixelSize: Units.dp(32)
                 height: toolBar.height
                 width: height
+
                 onClicked: {
                     if (stack.depth > 1) {
                         stack.pop()

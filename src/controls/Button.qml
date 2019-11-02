@@ -1,18 +1,19 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
+import QtQuick.Controls.Material 2.12
 import Style 1.0
 
 Controls.Button {
     property alias fontSize: content.font.pixelSize
     property alias radius: background.radius
-    property color defaultColor: Style.button.blueColor
+    property color defaultColor: Material.color(Material.Blue)
 
     id: root
     height: Style.button.height
 
     contentItem: Text {
         id: content
-        color: Style.button.textColor
+        color: "white"
         font.pixelSize: Style.font.size
         text: root.text
         horizontalAlignment: Text.AlignHCenter
@@ -20,7 +21,6 @@ Controls.Button {
         anchors.horizontalCenter: root.horizontalCenter
         anchors.verticalCenter: root.verticalCenter
     }
-
     background: Rectangle {
         id: background
         color: parent.pressed ?

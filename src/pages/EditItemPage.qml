@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
+import QtQuick.Controls.Material 2.12
 import QtQuick.Layouts 1.12
 import QtQuick.LocalStorage 2.12
 import Units 1.0
@@ -12,7 +13,7 @@ EditableItemPage {
 
     RoundButton {
         text: qsTr("X")
-        defaultColor: Style.button.redColor
+        defaultColor: Material.color(Material.Red)
 
         anchors {
             left: parent.left

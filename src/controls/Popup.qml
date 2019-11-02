@@ -5,6 +5,7 @@ import Style 1.0
 Controls.Popup {
     anchors.centerIn: parent
     modal: true
+
     background: Rectangle {
         radius: Style.rectangle.radius
     }
