@@ -13,5 +13,7 @@
         <file>pages/ItemPage.qml</file>
         <file>pages/MainListView.qml</file>
         <file>pages/MainPage.qml</file>
+        <file>pages/AddItemPage.qml</file>
+        <file>pages/EditableItemPage.qml</file>
     </qresource>
 </RCC>

@@ -33,7 +33,7 @@ ListView {
                 id: meaningText
                 width: 0.5 * item.width
                 font.pixelSize: Style.font.size
-                text: meanings.get(0).meaning
+                text: meanings.count > 0 ? meanings.get(0).meaning : ""
                 elide: Text.ElideRight
                 leftPadding: Units.dp(16)
             }

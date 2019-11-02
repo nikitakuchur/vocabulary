@@ -29,45 +29,11 @@ Item {
             bottomMargin: 10
         }
         onClicked: {
-            addItemPopup.open()
+            stack.push(dddItemPage);
         }
     }
-    Popup {
-        id: addItemPopup
-        width: window.width < window.height ?
-                   window.width - 20 : window.width / 2
-        contentItem: ColumnLayout {
-            spacing: Units.dp(10)
-            TextField {
-                id: expressionTextField
-                placeholderText: qsTr("New expression")
-                Layout.fillWidth: true
-                Layout.preferredHeight: Style.textField.height
-            }
-            TextField {
-                id: meaningTextField
-                placeholderText: qsTr("New meaning")
-                Layout.fillWidth: true
-                Layout.preferredHeight: Style.textField.height
-            }
-            Button {
-                text: qsTr("OK")
-                Layout.fillWidth: true
-                Layout.preferredHeight: Style.button.height
-                onClicked: {
-                    var rowid = parseInt(DB.insert(expressionTextField.text, [{ meaning: meaningTextField.text }]))
-                    listModel.append({
-                        id: rowid,
-                        expression: expressionTextField.text,
-                        meanings: [{ meaning: meaningTextField.text }]
-                    })
-                    addItemPopup.close()
-                }
-            }
-        }
-        onClosed: {
-            expressionTextField.text = "";
-            meaningTextField.text = "";
-        }
+    AddItemPage {
+        id: dddItemPage
+        visible: false
     }
 }
