@@ -10,8 +10,8 @@ import "utils/Database.js" as DB
 Controls.ApplicationWindow {
     id: window
     visible: true
-    width: 1080 / 3
-    height: 1920 / 3
+    width: 360
+    height: 640
     title: qsTr("Vocabulary")
     header: Controls.ToolBar {
         id: toolBar
@@ -37,8 +37,8 @@ Controls.ApplicationWindow {
     }
     onClosing: {
         if (stack.currentItem != mainPage) {
-            close.accepted = false
-            stack.pop()
+            close.accepted = false;
+            stack.pop();
         }
     }
     Component.onCompleted: DB.init()
