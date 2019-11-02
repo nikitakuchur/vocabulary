@@ -13,7 +13,7 @@ EditableItemPage {
 
     RoundButton {
         text: qsTr("X")
-        defaultColor: Material.color(Material.Red)
+        defaultColor: Material.color(Material.Pink)
 
         anchors {
             left: parent.left
@@ -46,10 +46,12 @@ EditableItemPage {
         stack.pop();
     }
 
-    Component.onCompleted: {
-        meaningList.clear();
-        for (var i = 0; i < meanings.count; i++) {
-            meaningList.append({ meaning: meanings.get(i).meaning });
+    onVisibleChanged: {
+        if (visible) {
+            meaningList.clear();
+            for (var i = 0; i < meanings.count; i++) {
+                meaningList.append({ meaning: meanings.get(i).meaning });
+            }
         }
     }
 }

@@ -4,5 +4,5 @@ import Style 1.0
 
 Rectangle {
     height: 1
-    color: Material.color(Material.Grey, Material.Shade200)
+    color: Material.color(Material.Grey, Material.Shade300)
 }

@@ -14,8 +14,12 @@ EditableItemPage {
             meanings: meanings
         });
         stack.pop();
-        expressionText = "";
-        meaningList.clear();
-        meaningList.append({ meaning: "" });
+    }
+    onVisibleChanged: {
+        if (visible) {
+            expressionText = "";
+            meaningList.clear();
+            meaningList.append({ meaning: "" });
+        }
     }
 }

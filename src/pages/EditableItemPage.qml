@@ -77,7 +77,7 @@ Controls.Page {
                         Layout.preferredHeight: parent.height
                         Layout.preferredWidth: parent.height
                         Layout.rightMargin: Units.dp(16)
-                        defaultColor: Material.color(Material.Red)
+                        defaultColor: Material.color(Material.Pink)
 
                         onClicked: {
                             repeater.model.remove(index);
