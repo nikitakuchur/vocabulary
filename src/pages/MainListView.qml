@@ -7,7 +7,7 @@ import "../controls"
 import "../utils/Database.js" as DB
 
 ListView {
-        property color defaultColor: "white"
+    property color defaultColor: "white"
 
     id: root
     anchors.fill: parent
@@ -47,6 +47,11 @@ ListView {
                 elide: Text.ElideRight
                 leftPadding: Units.dp(16)
             }
+        }
+
+        Line {
+            width: parent.width
+            anchors.bottom: parent.bottom
         }
 
         MouseArea {

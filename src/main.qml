@@ -54,11 +54,15 @@ Controls.ApplicationWindow {
         height: window.height
         interactive: stack.depth === 1
 
+        background: Rectangle {
+            color: "white"
+        }
+
         ListView {
             id: listView
 
             focus: true
-            currentIndex: -1
+            currentIndex: 0
             anchors.fill: parent
 
             delegate: Controls.ItemDelegate {
