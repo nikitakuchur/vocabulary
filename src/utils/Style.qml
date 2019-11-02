@@ -1,5 +1,6 @@
 pragma Singleton
 import QtQuick 2.12
+import QtQuick.Controls.Material 2.12
 import Units 1.0
 
 QtObject {
@@ -9,16 +10,12 @@ QtObject {
 
     property QtObject smallFont: QtObject {
         property int size: Units.dp(16)
-        property color color: "gray"
+        property color color: Material.color(Material.Grey)
     }
 
     property QtObject font: QtObject {
         property int size: Units.dp(24)
         property color color: "black"
-    }
-
-    property QtObject line: QtObject {
-        property color color: "#dfdfde"
     }
 
     property QtObject rectangle: QtObject {
