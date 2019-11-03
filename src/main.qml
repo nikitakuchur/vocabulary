@@ -72,15 +72,14 @@ Controls.ApplicationWindow {
                 highlighted: ListView.isCurrentItem
                 onClicked: {
                     listView.currentIndex = index;
-                    //stack.push(model.source);
+                    stack.push(model.source);
                     drawer.close();
                 }
             }
 
             model: ListModel {
-                ListElement { title: "Dictionary"; source: "" }
-                ListElement { title: "Quizzes"; source: "" }
-                ListElement { title: "About"; source: "" }
+                ListElement { title: "Quizzes"; source: "qrc:/pages/QuizPage.qml" }
+                ListElement { title: "About"; source: "qrc:/pages/AboutPage.qml" }
             }
 
             Controls.ScrollIndicator.vertical: Controls.ScrollIndicator { }

@@ -15,5 +15,7 @@
         <file>pages/MainPage.qml</file>
         <file>pages/AddItemPage.qml</file>
         <file>pages/EditableItemPage.qml</file>
+        <file>pages/QuizPage.qml</file>
+        <file>pages/AboutPage.qml</file>
     </qresource>
 </RCC>
