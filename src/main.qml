@@ -8,6 +8,9 @@ import "pages"
 import "utils/Database.js" as DB
 
 Controls.ApplicationWindow {
+    property ListModel dictList: ListModel {}
+    property string currentDict
+
     id: window
     visible: true
     width: 360
@@ -29,9 +32,9 @@ Controls.ApplicationWindow {
 
                 onClicked: {
                     if (stack.depth > 1) {
-                        stack.pop()
+                        stack.pop();
                     } else {
-                        drawer.open()
+                        drawer.open();
                     }
                 }
             }
@@ -59,19 +62,48 @@ Controls.ApplicationWindow {
         }
 
         ListView {
-            id: listView
-
+            id: menuListView
             focus: true
-            currentIndex: 0
             anchors.fill: parent
+
+            header: Column {
+                Repeater {
+                    id: repeater
+                    model: dictList
+
+                    delegate: Controls.ItemDelegate {
+                        text: model.name
+                        font.pixelSize: Style.font.size
+                        width: drawer.width
+                        height: Style.listView.itemHeight
+                        leftPadding: Units.dp(16)
+                        onClicked: {
+                            currentDict = dictList.get(index).name;
+                            DB.readAll(currentDict, mainPage.model);
+                            drawer.close();
+                        }
+                    }
+                }
+
+                Controls.MenuItem {
+                    text: "Add dictionary"
+                    font.pixelSize: Style.font.size
+                    width: drawer.width
+                    height: Style.listView.itemHeight
+                    leftPadding: Units.dp(16)
+                    onClicked: {
+                        addDictPopup.open();
+                    }
+                }
+            }
 
             delegate: Controls.ItemDelegate {
                 width: parent.width
                 text: model.title
                 font.pixelSize: Style.font.size
-                highlighted: ListView.isCurrentItem
+                height: Style.listView.itemHeight
+                leftPadding: Units.dp(16)
                 onClicked: {
-                    listView.currentIndex = index;
                     stack.push(model.source);
                     drawer.close();
                 }
@@ -81,8 +113,38 @@ Controls.ApplicationWindow {
                 ListElement { title: "Quizzes"; source: "qrc:/pages/QuizPage.qml" }
                 ListElement { title: "About"; source: "qrc:/pages/AboutPage.qml" }
             }
+        }
+    }
 
-            Controls.ScrollIndicator.vertical: Controls.ScrollIndicator { }
+    Popup {
+        id: addDictPopup
+        width: window.width * 0.5
+
+        Column {
+            anchors.fill: parent
+            spacing: Units.dp(16)
+
+            TextField {
+                id: nameTextField
+                placeholderText: "Name"
+                width: parent.width
+            }
+
+            Button {
+                text: "Add"
+                width: parent.width
+                onClicked: {
+                    dictList.append({ name: nameTextField.text });
+                    DB.createDict(nameTextField.text);
+                    addDictPopup.close();
+                }
+            }
+        }
+
+        onVisibleChanged: {
+            if (visible) {
+                nameTextField.text = "";
+            }
         }
     }
 
@@ -93,5 +155,13 @@ Controls.ApplicationWindow {
         }
     }
 
-    Component.onCompleted: DB.init()
+    Component.onCompleted: {
+        var tables = DB.getDicts();
+        for (var table of tables) {
+            dictList.append({ name: table });
+        }
+        if (dictList.count > 0) {
+            currentDict = dictList.get(0).name;
+        }
+    }
 }

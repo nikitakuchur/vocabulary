@@ -13,7 +13,9 @@ Controls.Page {
     ListModel {
         id: listModel
         Component.onCompleted: {
-            DB.readAll(listModel);
+            if (dictList.count > 0) {
+                DB.readAll(currentDict, listModel);
+            }
         }
     }
 
@@ -24,6 +26,7 @@ Controls.Page {
 
     RoundButton {
         text: qsTr("+")
+        visible: dictList.count > 0
         anchors {
             right: parent.right
             bottom: parent.bottom
@@ -31,12 +34,12 @@ Controls.Page {
             bottomMargin: 10
         }
         onClicked: {
-            stack.push(dddItemPage);
+            stack.push(addItemPage);
         }
     }
 
     AddItemPage {
-        id: dddItemPage
+        id: addItemPage
         visible: false
     }
 }

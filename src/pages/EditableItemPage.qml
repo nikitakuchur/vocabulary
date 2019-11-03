@@ -2,11 +2,9 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
 import QtQuick.Controls.Material 2.12
 import QtQuick.Layouts 1.12
-import QtQuick.LocalStorage 2.12
 import Units 1.0
 import Style 1.0
 import "../controls"
-import "../utils/Database.js" as DB
 
 Controls.Page {
     property alias expressionText: expressionTextField.text

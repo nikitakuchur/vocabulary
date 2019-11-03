@@ -23,9 +23,8 @@ EditableItemPage {
         }
 
         onClicked: {
-            DB.deleteRow(id);
-            listModel.clear();
-            DB.readAll(listModel);
+            DB.deleteRow(currentDict, id);
+            DB.readAll(currentDict, listModel);
             stack.pop(mainPage);
         }
     }
@@ -42,7 +41,7 @@ EditableItemPage {
                 count--;
             }
         }
-        DB.update(id, expression, meanings);
+        DB.update(currentDict, id, expression, meanings, 0);
         stack.pop();
     }
 
