@@ -9,7 +9,7 @@ import "utils/Database.js" as DB
 
 Controls.ApplicationWindow {
     property ListModel dictList: ListModel {}
-    property string currentDict
+    property int currentDictId
 
     id: window
     visible: true
@@ -78,8 +78,8 @@ Controls.ApplicationWindow {
                         height: Style.listView.itemHeight
                         leftPadding: Units.dp(16)
                         onClicked: {
-                            currentDict = dictList.get(index).name;
-                            DB.readAll(currentDict, mainPage.model);
+                            currentDictId = dictList.get(index).id;
+                            DB.readAll(currentDictId, mainPage.model);
                             drawer.close();
                         }
                     }
@@ -134,8 +134,8 @@ Controls.ApplicationWindow {
                 text: "Add"
                 width: parent.width
                 onClicked: {
-                    dictList.append({ name: nameTextField.text });
-                    DB.createDict(nameTextField.text);
+                    var id = DB.createDict(nameTextField.text);
+                    dictList.append({ id: id, name: nameTextField.text });
                     addDictPopup.close();
                 }
             }
@@ -156,12 +156,10 @@ Controls.ApplicationWindow {
     }
 
     Component.onCompleted: {
-        var tables = DB.getDicts();
-        for (var table of tables) {
-            dictList.append({ name: table });
-        }
+        DB.init();
+        DB.getDicts(dictList);
         if (dictList.count > 0) {
-            currentDict = dictList.get(0).name;
+            currentDictId = dictList.get(0).id;
         }
     }
 }

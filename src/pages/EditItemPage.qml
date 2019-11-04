@@ -41,7 +41,7 @@ EditableItemPage {
                 count--;
             }
         }
-        DB.update(currentDict, id, expression, meanings, 0);
+        DB.update(currentDictId, id, expression, meanings, 0);
         stack.pop();
     }
 

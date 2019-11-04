@@ -3,13 +3,13 @@ import "../utils/Database.js" as DB
 
 EditableItemPage {
     onSaveButtonClicked: {
-        var rowid = parseInt(DB.insert(currentDict, expressionText, meaningList, 0));
+        var id = DB.insert(currentDictId, expressionText, meaningList, 0);
         var meanings = []
         for (var i = 0; i < meaningList.count; i++) {
             meanings.push({ meaning: meaningList.get(i).meaning })
         }
         mainPage.model.append({
-            id: rowid,
+            id: id,
             expression: expressionText,
             meanings: meanings
         });
