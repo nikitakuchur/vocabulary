@@ -23,7 +23,6 @@
         <file>icons/done.svg</file>
         <file>icons/edit.svg</file>
         <file>icons/menu.svg</file>
-        <file>icons/remove.svg</file>
         <file>icons/more.svg</file>
     </qresource>
 </RCC>
