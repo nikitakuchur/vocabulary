@@ -107,8 +107,8 @@ Controls.ApplicationWindow {
                         }
 
                         onClicked: {
-                            currentDictId = dictList.get(index).id;
                             repeater.currentIndex = index;
+                            currentDictId = dictList.get(index).id;
                             DB.readAll(currentDictId, dictPage.model);
                             drawer.close();
                         }
@@ -148,38 +148,6 @@ Controls.ApplicationWindow {
         }
     }
 
-    Popup {
-        id: addDictPopup
-        width: window.width * 0.8
-
-        Column {
-            anchors.fill: parent
-            spacing: Units.dp(16)
-
-            TextField {
-                id: nameTextField
-                placeholderText: "Name"
-                width: parent.width
-            }
-
-            Button {
-                text: "Add"
-                width: parent.width
-                onClicked: {
-                    var id = DB.createDict(nameTextField.text);
-                    dictList.append({ id: id, name: nameTextField.text });
-                    addDictPopup.close();
-                }
-            }
-        }
-
-        onVisibleChanged: {
-            if (visible) {
-                nameTextField.text = "";
-            }
-        }
-    }
-
     onClosing: {
         if (stack.depth > 1) {
             close.accepted = false;
@@ -192,6 +160,37 @@ Controls.ApplicationWindow {
         DB.getDicts(dictList);
         if (dictList.count > 0) {
             currentDictId = dictList.get(0).id;
+        }
+    }
+    Popup {
+        id: addDictPopup
+        width: window.width * 0.8
+        anchors.centerIn: parent
+
+        contentItem: ColumnLayout {
+            spacing: Units.dp(16)
+
+            TextField {
+                id: nameTextField
+                placeholderText: "Name"
+                Layout.fillWidth: true
+            }
+
+            Button {
+                text: "Add"
+                Layout.fillWidth: true
+                onClicked: {
+                    var id = DB.createDict(nameTextField.text);
+                    dictList.append({ id: id, name: nameTextField.text });
+                    addDictPopup.close();
+                }
+            }
+        }
+
+        onVisibleChanged: {
+            if (visible) {
+                nameTextField.text = "";
+            }
         }
     }
 }
