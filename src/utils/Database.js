@@ -34,7 +34,9 @@ function getDicts() {
         var result = tx.executeSql('SELECT name FROM sqlite_master WHERE type = "table"');
         for (var i = 0; i < result.rows.length; i++) {
             var name = result.rows.item(i).name;
-            tables.push(name.slice(5, name.length));
+            if (name.slice(0, 5) === 'dict_') {
+                tables.push(name.slice(5, name.length));
+            }
         }
     });
     return tables;
