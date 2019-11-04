@@ -165,7 +165,6 @@ Controls.ApplicationWindow {
     Popup {
         id: addDictPopup
         width: window.width * 0.8
-        anchors.centerIn: parent
 
         contentItem: ColumnLayout {
             spacing: Units.dp(16)
