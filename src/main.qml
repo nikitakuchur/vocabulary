@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
 import QtQuick.Controls.Material 2.12
+import QtQuick.Layouts 1.12
 import QtQuick.LocalStorage 2.12
 import Units 1.0
 import Style 1.0
@@ -22,14 +23,13 @@ Controls.ApplicationWindow {
         id: toolBar
         height: Style.toolBar.height
 
-        Row {
+        RowLayout {
             anchors.fill: parent
 
             Controls.ToolButton {
-                text: stack.depth > 1 ? "‹" : "⋮"
-                font.pixelSize: Units.dp(32)
-                height: toolBar.height
-                width: height
+                icon.source: stack.depth > 1 ? "icons/back.svg" : "icons/menu.svg"
+                Layout.preferredWidth: toolBar.height
+                Layout.preferredHeight: toolBar.height
 
                 onClicked: {
                     if (stack.depth > 1) {
@@ -38,6 +38,20 @@ Controls.ApplicationWindow {
                         drawer.open();
                     }
                 }
+            }
+
+            Controls.Label {
+                text: "Dictionary"
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                Layout.fillWidth: true
+            }
+
+            Controls.ToolButton {
+                icon.source: "icons/more.svg"
+                Layout.preferredWidth: toolBar.height
+                Layout.preferredHeight: toolBar.height
+                //onClicked: menu.open()
             }
         }
     }

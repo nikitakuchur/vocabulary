@@ -25,7 +25,8 @@ Controls.Page {
     }
 
     RoundButton {
-        text: qsTr("+")
+        icon.source: "../icons/add.svg"
+        icon.color: "white"
         visible: dictList.count > 0
         anchors {
             right: parent.right

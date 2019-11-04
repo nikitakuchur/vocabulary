@@ -56,7 +56,8 @@ Controls.Page {
         }
     }
     RoundButton {
-        text: qsTr("Edit")
+        icon.source: "../icons/edit.svg"
+        icon.color: "white"
 
         anchors {
             right: parent.right

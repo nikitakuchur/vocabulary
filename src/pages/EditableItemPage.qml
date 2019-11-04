@@ -97,13 +97,16 @@ Controls.Page {
     }
 
     RoundButton {
-        text: qsTr("Save")
+        icon.source: "../icons/done.svg"
+        icon.color: "white"
+
         anchors {
             right: parent.right
             bottom: parent.bottom
             rightMargin: 10
             bottomMargin: 10
         }
+
         onClicked: saveButtonClicked()
     }
 }

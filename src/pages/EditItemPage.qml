@@ -12,7 +12,8 @@ EditableItemPage {
     expressionText: expression
 
     RoundButton {
-        text: qsTr("X")
+        icon.source: "../icons/clear.svg"
+        icon.color: "white"
         defaultColor: Material.color(Material.Pink)
 
         anchors {
