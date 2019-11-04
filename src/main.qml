@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
+import QtQuick.Controls.Material 2.12
 import QtQuick.LocalStorage 2.12
 import Units 1.0
 import Style 1.0
@@ -68,24 +69,43 @@ Controls.ApplicationWindow {
 
             header: Column {
                 Repeater {
+                    property int currentIndex: 0
+
                     id: repeater
                     model: dictList
 
                     delegate: Controls.ItemDelegate {
-                        text: model.name
-                        font.pixelSize: Style.font.size
                         width: drawer.width
                         height: Style.listView.itemHeight
                         leftPadding: Units.dp(16)
+
+                        contentItem: Text {
+                            color: repeater.currentIndex == index ? "white" : "black"
+                            font.pixelSize: Style.font.size
+                            text: model.name
+                            //horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            //anchors.horizontalCenter: drawer.horizontalCenter
+                            anchors.verticalCenter: drawer.verticalCenter
+                        }
+
+                        background: Rectangle {
+                            color: repeater.currentIndex == index ?
+                                       Material.color(Material.Blue) : "white"
+                        }
+
                         onClicked: {
                             currentDictId = dictList.get(index).id;
+                            repeater.currentIndex = index;
                             DB.readAll(currentDictId, mainPage.model);
                             drawer.close();
                         }
                     }
                 }
 
-                Controls.MenuItem {
+                Line { width: drawer.width }
+
+                Controls.ItemDelegate {
                     text: "Add dictionary"
                     font.pixelSize: Style.font.size
                     width: drawer.width
@@ -118,7 +138,7 @@ Controls.ApplicationWindow {
 
     Popup {
         id: addDictPopup
-        width: window.width * 0.5
+        width: window.width * 0.8
 
         Column {
             anchors.fill: parent
