@@ -44,12 +44,12 @@ Controls.ApplicationWindow {
 
     Controls.StackView {
         id: stack
-        initialItem: mainPage
+        initialItem: dictPage
         anchors.fill: parent
     }
 
-    MainPage {
-        id: mainPage
+    DictPage {
+        id: dictPage
     }
 
     Controls.Drawer {
@@ -83,9 +83,7 @@ Controls.ApplicationWindow {
                             color: repeater.currentIndex == index ? "white" : "black"
                             font.pixelSize: Style.font.size
                             text: model.name
-                            //horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
-                            //anchors.horizontalCenter: drawer.horizontalCenter
                             anchors.verticalCenter: drawer.verticalCenter
                         }
 
@@ -97,7 +95,7 @@ Controls.ApplicationWindow {
                         onClicked: {
                             currentDictId = dictList.get(index).id;
                             repeater.currentIndex = index;
-                            DB.readAll(currentDictId, mainPage.model);
+                            DB.readAll(currentDictId, dictPage.model);
                             drawer.close();
                         }
                     }

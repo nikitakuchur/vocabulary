@@ -8,7 +8,7 @@ EditableItemPage {
         for (var i = 0; i < meaningList.count; i++) {
             meanings.push({ meaning: meaningList.get(i).meaning })
         }
-        mainPage.model.append({
+        dictPage.model.append({
             id: id,
             expression: expressionText,
             meanings: meanings

@@ -19,7 +19,7 @@ Controls.Page {
         }
     }
 
-    MainListView {
+    DictListView {
         id: listView
         model: listModel
     }

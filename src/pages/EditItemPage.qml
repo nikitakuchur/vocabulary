@@ -25,7 +25,7 @@ EditableItemPage {
         onClicked: {
             DB.deleteRow(currentDictId, id);
             DB.readAll(currentDictId, listModel);
-            stack.pop(mainPage);
+            stack.pop(dictPage);
         }
     }
 

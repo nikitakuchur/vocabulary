@@ -11,8 +11,8 @@
         <file>utils/Database.js</file>
         <file>pages/EditItemPage.qml</file>
         <file>pages/ItemPage.qml</file>
-        <file>pages/MainListView.qml</file>
-        <file>pages/MainPage.qml</file>
+        <file>pages/DictListView.qml</file>
+        <file>pages/DictPage.qml</file>
         <file>pages/AddItemPage.qml</file>
         <file>pages/EditableItemPage.qml</file>
         <file>pages/QuizPage.qml</file>
