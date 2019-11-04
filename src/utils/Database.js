@@ -46,7 +46,7 @@ function getDicts(model) {
     var dicts = [];
     model.clear();
     db.transaction(function (tx) {
-        var result = tx.executeSql('SELECT rowid, name FROM dicts ORDER BY rowid DESC');
+        var result = tx.executeSql('SELECT rowid, name FROM dicts ORDER BY rowid ASC');
         for (var i = 0; i < result.rows.length; i++) {
             model.append({
                              id: result.rows.item(i).rowid,
@@ -70,7 +70,7 @@ function readAll(dictId, model) {
     model.clear();
     var db = getHandle();
     db.transaction(function (tx) {
-        var result = tx.executeSql('SELECT rowid, expression, meanings, level FROM dict' + dictId + ' ORDER BY rowid DESC');
+        var result = tx.executeSql('SELECT rowid, expression, meanings, level FROM dict' + dictId + ' ORDER BY rowid ASC');
         for (var i = 0; i < result.rows.length; i++) {
             model.append({
                              id: result.rows.item(i).rowid,
