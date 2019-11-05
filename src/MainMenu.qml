@@ -25,8 +25,6 @@ Controls.Drawer {
 
         header: Column {
             Repeater {
-                //property int currentIndex: 0
-
                 id: repeater
                 model: dictList
 

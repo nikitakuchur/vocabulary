@@ -41,6 +41,13 @@ function deleteDict(id) {
     });
 }
 
+function renameDict(id, name) {
+    var db = getHandle();
+    db.transaction(function (tx) {
+        tx.executeSql('UPDATE dicts SET name = ? WHERE rowid = ?', [name, id]);
+    });
+}
+
 function getDicts(model) {
     var db = getHandle();
     var dicts = [];
@@ -87,7 +94,7 @@ function update(dictId, id, expression, meanings, level) {
     db.transaction(function (tx) {
         tx.executeSql('UPDATE dict' + dictId + ' SET expression = ?, meanings = ?, level = ? WHERE rowid = ?',
                       [expression, meaningsToString(meanings), level, id]);
-    })
+    });
 }
 
 function deleteRow(dictId, id) {

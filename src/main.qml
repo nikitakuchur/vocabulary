@@ -56,7 +56,10 @@ Controls.ApplicationWindow {
 
                 Controls.Menu {
                     id: more
-                    Controls.MenuItem { text: qsTr("Rename") }
+                    Controls.MenuItem {
+                        text: qsTr("Rename")
+                        onClicked: editеDictPopup.open()
+                    }
                     Controls.MenuItem {
                         text: qsTr("Delete")
                         onClicked: {
@@ -107,33 +110,34 @@ Controls.ApplicationWindow {
         }
     }
 
-    Popup {
+    NamePopup {
         id: addDictPopup
-        width: window.width * 0.8
 
-        contentItem: ColumnLayout {
-            spacing: Units.dp(16)
-
-            TextField {
-                id: nameTextField
-                placeholderText: qsTr("Name")
-                Layout.fillWidth: true
-            }
-
-            Button {
-                text: qsTr("Add")
-                Layout.fillWidth: true
-                onClicked: {
-                    var id = DB.createDict(nameTextField.text);
-                    dictList.append({ id: id, name: nameTextField.text });
-                    addDictPopup.close();
-                }
-            }
+        onAddButtonClicked: {
+            var id = DB.createDict(text);
+            dictList.append({ id: id, name: text });
+            addDictPopup.close();
         }
 
         onVisibleChanged: {
             if (visible) {
-                nameTextField.text = "";
+                text = "";
+            }
+        }
+    }
+
+    NamePopup {
+        id: editеDictPopup
+
+        onAddButtonClicked: {
+            var id = DB.renameDict(dictList.get(currentDictIndex).id, text);
+            dictList.set(currentDictIndex, { name: text });
+            editеDictPopup.close();
+        }
+
+        onVisibleChanged: {
+            if (visible) {
+                text = dictList.get(currentDictIndex).name;
             }
         }
     }
