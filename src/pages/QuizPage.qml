@@ -5,7 +5,7 @@ import Units 1.0
 
 Controls.Page {
     Controls.Label {
-        text: "Quizzes"
+        text: qsTr("Quizzes")
         font.pixelSize: Style.font.size
         padding: Units.dp(16)
     }

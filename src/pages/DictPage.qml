@@ -14,7 +14,7 @@ Controls.Page {
         id: listModel
         Component.onCompleted: {
             if (dictList.count > 0) {
-                DB.readAll(currentDictId, listModel);
+                DB.readAll(dictList.get(currentDictIndex).id, listModel);
             }
         }
     }

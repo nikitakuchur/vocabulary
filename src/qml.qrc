@@ -24,5 +24,6 @@
         <file>icons/edit.svg</file>
         <file>icons/menu.svg</file>
         <file>icons/more.svg</file>
+        <file>MainMenu.qml</file>
     </qresource>
 </RCC>

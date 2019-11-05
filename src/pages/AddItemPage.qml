@@ -3,7 +3,7 @@ import "../utils/Database.js" as DB
 
 EditableItemPage {
     onSaveButtonClicked: {
-        var id = DB.insert(currentDictId, expressionText, meaningList, 0);
+        var id = DB.insert(dictList.get(currentDictIndex).id, expressionText, meaningList, 0);
         var meanings = []
         for (var i = 0; i < meaningList.count; i++) {
             meanings.push({ meaning: meaningList.get(i).meaning })

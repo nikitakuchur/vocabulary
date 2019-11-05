@@ -22,7 +22,7 @@ Controls.Page {
             spacing: Units.dp(16)
 
             Controls.Label {
-                text: "Expression"
+                text: qsTr("Expression")
                 font.pixelSize: Style.smallFont.size
                 color: Style.smallFont.color
                 padding: Units.dp(16)
@@ -40,7 +40,7 @@ Controls.Page {
             Line { width: root.width }
 
             Controls.Label {
-                text: "Meaning"
+                text: qsTr("Meaning")
                 font.pixelSize: Style.smallFont.size
                 color: Style.smallFont.color
                 leftPadding: Units.dp(16)
@@ -70,7 +70,7 @@ Controls.Page {
 
                     Button {
                         visible: repeater.count > 1
-                        text: qsTr("-")
+                        text: "-"
 
                         Layout.preferredHeight: parent.height
                         Layout.preferredWidth: parent.height
@@ -85,7 +85,7 @@ Controls.Page {
             }
 
             Button {
-                text: "Add meaning"
+                text: qsTr("Add meaning")
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.margins: Units.dp(16)
