@@ -9,6 +9,6 @@ Controls.MenuItem {
     leftPadding: Units.dp(16)
     background: Rectangle {
         anchors.fill: parent
-        color: pressed ? Qt.rgba(0.9, 0.9, 0.9, 1) : "white"
+        color: pressed ? "#e6e6e6" : "white"
     }
 }
