@@ -43,6 +43,7 @@ Controls.ApplicationWindow {
             Controls.Label {
                 id: toolBarLable
                 text: dictList.count > 0 ? dictList.get(currentDictIndex).name : ""
+                visible: stack.depth == 1
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
                 Layout.fillWidth: true
@@ -50,6 +51,7 @@ Controls.ApplicationWindow {
 
             Controls.ToolButton {
                 icon.source: "icons/more.svg"
+                visible: stack.depth == 1
                 Layout.preferredWidth: toolBar.height
                 Layout.preferredHeight: toolBar.height
                 onClicked: dictMenu.open();
