@@ -52,30 +52,10 @@ Controls.ApplicationWindow {
                 icon.source: "icons/more.svg"
                 Layout.preferredWidth: toolBar.height
                 Layout.preferredHeight: toolBar.height
-                onClicked: more.open();
+                onClicked: dictMenu.open();
 
-                Controls.Menu {
-                    id: more
-                    Controls.MenuItem {
-                        text: qsTr("Rename")
-                        onClicked: editеDictPopup.open()
-                    }
-                    Controls.MenuItem {
-                        text: qsTr("Delete")
-                        onClicked: {
-                            var oldIndex = currentDictIndex;
-                            if (oldIndex > 0) {
-                                currentDictIndex--;
-                            }
-                            DB.deleteDict(dictList.get(oldIndex).id);
-                            dictList.remove(oldIndex);
-                            if (dictList.count > 0) {
-                                DB.readAll(dictList.get(currentDictIndex).id, dictPage.model);
-                            } else {
-                                dictPage.model.clear();
-                            }
-                        }
-                    }
+                DictMenu {
+                    id: dictMenu
                 }
             }
         }

@@ -42,7 +42,7 @@ EditableItemPage {
                 count--;
             }
         }
-        DB.update(currentDictId, id, expression, meanings, 0);
+        DB.update(dictList.get(currentDictIndex).id, id, expression, meanings, 0);
         stack.pop();
     }
 

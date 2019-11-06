@@ -26,5 +26,7 @@
         <file>icons/more.svg</file>
         <file>MainMenu.qml</file>
         <file>NamePopup.qml</file>
+        <file>DictMenu.qml</file>
+        <file>controls/DictMenuItem.qml</file>
     </qresource>
 </RCC>
