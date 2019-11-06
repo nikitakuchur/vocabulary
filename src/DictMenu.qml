@@ -9,7 +9,7 @@ Controls.Menu {
     modal: true
     DictMenuItem {
         text: qsTr("Rename")
-        onClicked: editеDictPopup.open()
+        onClicked: editDictPopup.open()
     }
 
     Line {
