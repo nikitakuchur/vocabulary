@@ -40,12 +40,13 @@ Controls.ApplicationWindow {
                 }
             }
 
-            Controls.Label {
+            Text {
                 id: toolBarLable
                 text: dictList.count > 0 ? dictList.get(currentDictIndex).name : ""
                 visible: stack.depth == 1
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
+                elide: Text.ElideRight
                 Layout.fillWidth: true
             }
 
@@ -109,12 +110,12 @@ Controls.ApplicationWindow {
     }
 
     NamePopup {
-        id: editеDictPopup
+        id: editDictPopup
 
         onAddButtonClicked: {
             var id = DB.renameDict(dictList.get(currentDictIndex).id, text);
             dictList.set(currentDictIndex, { name: text });
-            editеDictPopup.close();
+            editDictPopup.close();
         }
 
         onVisibleChanged: {

@@ -34,15 +34,14 @@ Controls.Drawer {
                     height: Style.listView.itemHeight
                     leftPadding: Units.dp(16)
 
-                    contentItem: RowLayout {
-                        Controls.Label {
-                            color: currentDictIndex == index ? "white" : "black"
-                            font.pixelSize: Style.font.size
-                            text: model.name
-                            verticalAlignment: Text.AlignVCenter
-                            anchors.verticalCenter: drawer.verticalCenter
-                            Layout.fillWidth: true
-                        }
+                    contentItem: Text {
+                        color: currentDictIndex == index ? "white" : "black"
+                        font.pixelSize: Style.font.size
+                        text: model.name
+                        elide: Text.ElideRight
+                        verticalAlignment: Text.AlignVCenter
+                        anchors.verticalCenter: drawer.verticalCenter
+                        Layout.fillWidth: true
                     }
 
                     background: Rectangle {

@@ -1,6 +1,6 @@
 import QtQuick 2.12
-import QtQuick.LocalStorage 2.12
 import QtQuick.Controls.Material 2.12
+import QtQuick.LocalStorage 2.12
 import Units 1.0
 import Style 1.0
 import "../controls"

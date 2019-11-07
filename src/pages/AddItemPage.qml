@@ -15,6 +15,7 @@ EditableItemPage {
         });
         stack.pop();
     }
+
     onVisibleChanged: {
         if (visible) {
             expressionText = "";

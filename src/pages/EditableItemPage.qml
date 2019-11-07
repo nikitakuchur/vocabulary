@@ -21,7 +21,7 @@ Controls.Page {
             id: column
             spacing: Units.dp(16)
 
-            Controls.Label {
+            Text {
                 text: qsTr("Expression")
                 font.pixelSize: Style.smallFont.size
                 color: Style.smallFont.color
@@ -39,7 +39,7 @@ Controls.Page {
 
             Line { width: root.width }
 
-            Controls.Label {
+            Text {
                 text: qsTr("Meaning")
                 font.pixelSize: Style.smallFont.size
                 color: Style.smallFont.color
