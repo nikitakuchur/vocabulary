@@ -21,6 +21,7 @@ Controls.Button {
         anchors.horizontalCenter: root.horizontalCenter
         anchors.verticalCenter: root.verticalCenter
     }
+
     background: Rectangle {
         id: background
         color: parent.pressed ?

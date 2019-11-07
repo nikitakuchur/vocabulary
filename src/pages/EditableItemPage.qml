@@ -12,6 +12,7 @@ Controls.Page {
     signal saveButtonClicked()
 
     id: root
+
     Flickable {
         anchors.fill: parent
         contentHeight: column.height + parent.height / 2

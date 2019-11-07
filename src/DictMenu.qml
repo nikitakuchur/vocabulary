@@ -7,6 +7,7 @@ import "controls"
 Controls.Menu {
     id: more
     modal: true
+
     DictMenuItem {
         text: qsTr("Rename")
         onClicked: editDictPopup.open()
