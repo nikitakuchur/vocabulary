@@ -65,6 +65,7 @@ Controls.Page {
             }
         }
     }
+
     RoundButton {
         icon.source: "../icons/edit.svg"
         icon.color: "white"
