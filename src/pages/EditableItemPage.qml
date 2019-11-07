@@ -16,7 +16,7 @@ Controls.Page {
     Flickable {
         anchors.fill: parent
         contentHeight: column.height + parent.height / 2
-        Controls.ScrollBar.vertical: Controls.ScrollBar { }
+        Controls.ScrollBar.vertical: Controls.ScrollBar {}
 
         Column {
             id: column
@@ -33,6 +33,7 @@ Controls.Page {
             TextField {
                 id: expressionTextField
                 text: ""
+                wrapMode: TextField.Wrap
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.margins: Units.dp(16)
@@ -53,13 +54,13 @@ Controls.Page {
 
                 RowLayout {
                     width: root.width
-                    height: Style.button.height
+                    height: meaningTextField.height
 
                     TextField {
                         id: meaningTextField
                         text: modelData
+                        wrapMode: TextField.Wrap
 
-                        Layout.preferredHeight: parent.height
                         Layout.fillWidth: true
                         Layout.leftMargin: Units.dp(16)
                         Layout.rightMargin: repeater.count > 1 ? 0 : Units.dp(16)
@@ -73,8 +74,8 @@ Controls.Page {
                         visible: repeater.count > 1
                         text: "-"
 
-                        Layout.preferredHeight: parent.height
-                        Layout.preferredWidth: parent.height
+                        Layout.alignment: Qt.AlignTop
+                        Layout.preferredWidth: implicitHeight
                         Layout.rightMargin: Units.dp(16)
                         defaultColor: Material.color(Material.Pink)
 

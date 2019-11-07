@@ -22,16 +22,8 @@ QtObject {
         property real radius: Units.dp(8)
     }
 
-    property QtObject button: QtObject {
-        property int height: Units.dp(46)
-    }
-
     property QtObject roundButton: QtObject {
-        property int width: Units.dp(70)
-    }
-
-    property QtObject textField: QtObject {
-        property int height: Units.dp(46)
+        property int width: Units.dp(60)
     }
 
     property QtObject listView: QtObject {
