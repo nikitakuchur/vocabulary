@@ -136,7 +136,6 @@ Controls.ApplicationWindow {
                 id: textField
                 text: qsTr("Are you sure?")
                 font.pixelSize: Style.font.size
-                wrapMode: Text.Wrap
                 Layout.fillWidth: true
             }
 
@@ -146,6 +145,7 @@ Controls.ApplicationWindow {
                     Layout.fillWidth: true
                     onClicked: deleteDictPopup.close()
                 }
+
                 Button {
                     text: qsTr("Yes")
                     Layout.fillWidth: true
