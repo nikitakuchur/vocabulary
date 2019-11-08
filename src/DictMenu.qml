@@ -1,6 +1,9 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
+import QtQuick.Layouts 1.12
 import QtQuick.LocalStorage 2.12
+import Units 1.0
+import Style 1.0
 import "utils/Database.js" as DB
 import "controls"
 
@@ -20,17 +23,8 @@ Controls.Menu {
     DictMenuItem {
         text: qsTr("Delete")
         onClicked: {
-            var oldIndex = currentDictIndex;
-            if (oldIndex > 0) {
-                currentDictIndex--;
-            }
-            DB.deleteDict(dictList.get(oldIndex).id);
-            dictList.remove(oldIndex);
-            if (dictList.count > 0) {
-                DB.readAll(dictList.get(currentDictIndex).id, dictPage.model);
-            } else {
-                dictPage.model.clear();
-            }
+            deleteDictPopup.open();
+            /**/
         }
     }
 }

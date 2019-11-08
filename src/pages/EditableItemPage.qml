@@ -72,7 +72,7 @@ Controls.Page {
 
                     Button {
                         visible: repeater.count > 1
-                        text: "-"
+                        text: "–"
 
                         Layout.alignment: Qt.AlignTop
                         Layout.preferredWidth: implicitHeight

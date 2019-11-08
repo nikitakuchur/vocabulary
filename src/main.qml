@@ -124,4 +124,47 @@ Controls.ApplicationWindow {
             }
         }
     }
+
+    Popup {
+        id: deleteDictPopup
+        width: window.width * 0.8
+
+        contentItem: ColumnLayout {
+            spacing: Units.dp(16)
+
+            Text {
+                id: textField
+                text: qsTr("Are you sure?")
+                font.pixelSize: Style.font.size
+                wrapMode: Text.Wrap
+                Layout.fillWidth: true
+            }
+
+            RowLayout {
+                Button {
+                    text: qsTr("No")
+                    Layout.fillWidth: true
+                    onClicked: deleteDictPopup.close()
+                }
+                Button {
+                    text: qsTr("Yes")
+                    Layout.fillWidth: true
+                    onClicked: {
+                        var oldIndex = currentDictIndex;
+                        if (oldIndex > 0) {
+                            currentDictIndex--;
+                        }
+                        DB.deleteDict(dictList.get(oldIndex).id);
+                        dictList.remove(oldIndex);
+                        if (dictList.count > 0) {
+                            DB.readAll(dictList.get(currentDictIndex).id, dictPage.model);
+                        } else {
+                            dictPage.model.clear();
+                        }
+                        deleteDictPopup.close();
+                    }
+                }
+            }
+        }
+    }
 }
