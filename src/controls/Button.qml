@@ -9,7 +9,6 @@ Controls.Button {
     property color defaultColor: Material.color(Material.Blue)
 
     id: root
-    height: Style.button.height
 
     contentItem: Text {
         id: content
