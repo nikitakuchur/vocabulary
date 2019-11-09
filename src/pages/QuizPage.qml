@@ -7,7 +7,7 @@ import "../controls"
 
 Controls.Page {
     property int expressionIndex: 0
-    property var meanings
+    property variant meanings
 
     id: root
     visible: false

@@ -32,8 +32,8 @@ EditableItemPage {
 
     onSaveButtonClicked: {
         expression = expressionText;
-        var count = Math.max(meanings.count, meaningList.count);
-        for (var i = 0; i < count; i++) {
+        let count = Math.max(meanings.count, meaningList.count);
+        for (let i = 0; i < count; i++) {
             if (i < meaningList.count) {
                 meanings.set(i, { meaning: meaningList.get(i).meaning });
             } else {
@@ -49,7 +49,7 @@ EditableItemPage {
     onVisibleChanged: {
         if (visible) {
             meaningList.clear();
-            for (var i = 0; i < meanings.count; i++) {
+            for (let i = 0; i < meanings.count; i++) {
                 meaningList.append({ meaning: meanings.get(i).meaning });
             }
         }

@@ -3,9 +3,9 @@ import "../utils/Database.js" as DB
 
 EditableItemPage {
     onSaveButtonClicked: {
-        var id = DB.insert(dictList.get(currentDictIndex).id, expressionText, meaningList, 0);
-        var meanings = []
-        for (var i = 0; i < meaningList.count; i++) {
+        const id = DB.insert(dictList.get(currentDictIndex).id, expressionText, meaningList, 0);
+        let meanings = []
+        for (let i = 0; i < meaningList.count; i++) {
             meanings.push({ meaning: meaningList.get(i).meaning })
         }
         dictPage.model.append({

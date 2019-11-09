@@ -1,5 +1,5 @@
 function init() {
-    var db = getHandle();
+    const db = getHandle();
     try {
         db.transaction(function (tx) {
             tx.executeSql('CREATE TABLE IF NOT EXISTS dicts (name TEXT)');
@@ -10,8 +10,9 @@ function init() {
 }
 
 function getHandle() {
+    let db;
     try {
-        var db = LocalStorage.openDatabaseSync("Vocabulary_DB", "", "Vocabulary", 1000000);
+        db = LocalStorage.openDatabaseSync("Vocabulary_DB", "", "Vocabulary", 1000000);
     } catch (err) {
         console.log("Error opening database: " + err);
     }
@@ -19,8 +20,8 @@ function getHandle() {
 }
 
 function createDict(name) {
-    var db = getHandle();
-    var rowid = 0;
+    const db = getHandle();
+    let rowid = 0;
     try {
         db.transaction(function (tx) {
             tx.executeSql('INSERT INTO dicts VALUES(?)', [name]);
@@ -34,7 +35,7 @@ function createDict(name) {
 }
 
 function deleteDict(id) {
-    var db = getHandle();
+    const db = getHandle();
     db.transaction(function (tx) {
         tx.executeSql('DROP TABLE IF EXISTS dict' + id);
         tx.executeSql('DELETE FROM dicts WHERE rowid = ?', [id]);
@@ -42,19 +43,19 @@ function deleteDict(id) {
 }
 
 function renameDict(id, name) {
-    var db = getHandle();
+    const db = getHandle();
     db.transaction(function (tx) {
         tx.executeSql('UPDATE dicts SET name = ? WHERE rowid = ?', [name, id]);
     });
 }
 
 function getDicts(model) {
-    var db = getHandle();
-    var dicts = [];
+    const db = getHandle();
+    let dicts = [];
     model.clear();
     db.transaction(function (tx) {
-        var result = tx.executeSql('SELECT rowid, name FROM dicts ORDER BY rowid ASC');
-        for (var i = 0; i < result.rows.length; i++) {
+        let result = tx.executeSql('SELECT rowid, name FROM dicts ORDER BY rowid ASC');
+        for (let i = 0; i < result.rows.length; i++) {
             model.append({
                              id: result.rows.item(i).rowid,
                              name: result.rows.item(i).name
@@ -64,8 +65,8 @@ function getDicts(model) {
 }
 
 function insert(dictId, expression, meanings, level) {
-    var db = getHandle();
-    var rowid = 0;
+    const db = getHandle();
+    let rowid = 0;
     db.transaction(function (tx) {
         tx.executeSql('INSERT INTO dict' + dictId + ' VALUES(?, ?, ?)', [expression, meaningsToString(meanings), level]);
         rowid = tx.executeSql('SELECT last_insert_rowid()').insertId;
@@ -75,10 +76,10 @@ function insert(dictId, expression, meanings, level) {
 
 function readAll(dictId, model) {
     model.clear();
-    var db = getHandle();
+    const db = getHandle();
     db.transaction(function (tx) {
-        var result = tx.executeSql('SELECT rowid, expression, meanings, level FROM dict' + dictId + ' ORDER BY rowid ASC');
-        for (var i = 0; i < result.rows.length; i++) {
+        const result = tx.executeSql('SELECT rowid, expression, meanings, level FROM dict' + dictId + ' ORDER BY rowid ASC');
+        for (let i = 0; i < result.rows.length; i++) {
             model.append({
                              id: result.rows.item(i).rowid,
                              expression: result.rows.item(i).expression,
@@ -90,7 +91,7 @@ function readAll(dictId, model) {
 }
 
 function update(dictId, id, expression, meanings, level) {
-    var db = getHandle();
+    const db = getHandle();
     db.transaction(function (tx) {
         tx.executeSql('UPDATE dict' + dictId + ' SET expression = ?, meanings = ?, level = ? WHERE rowid = ?',
                       [expression, meaningsToString(meanings), level, id]);
@@ -98,16 +99,16 @@ function update(dictId, id, expression, meanings, level) {
 }
 
 function deleteRow(dictId, id) {
-    var db = getHandle();
+    const db = getHandle();
     db.transaction(function (tx) {
         tx.executeSql('DELETE FROM dict' + dictId + ' WHERE rowid = ?', [id]);
     });
 }
 
 function meaningsToString(meanings) {
-    var str = "";
-    var separator = '__,__';
-    for (var i = 0; i < meanings.count; i++) {
+    let str = "";
+    const separator = '__,__';
+    for (let i = 0; i < meanings.count; i++) {
         str += meanings.get(i).meaning + separator;
     }
     str = str.slice(0, -separator.length);
@@ -115,9 +116,9 @@ function meaningsToString(meanings) {
 }
 
 function stringToMeanings(str) {
-    var array = str.split('__,__');
-    var meanings = [];
-    for (var val of array) {
+    let array = str.split('__,__');
+    let meanings = [];
+    for (let val of array) {
         meanings.push({ meaning: val });
     }
     return meanings;
