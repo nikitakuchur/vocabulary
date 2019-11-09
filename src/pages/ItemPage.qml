@@ -15,31 +15,32 @@ Controls.Page {
 
         Column {
             id: column
+            spacing: Units.dp(16)
 
             Text {
                 text: qsTr("Expression")
                 font.pixelSize: Style.smallFont.size
                 color: Style.smallFont.color
-                padding: Units.dp(16)
-                bottomPadding: 0
+                topPadding: Units.dp(16)
+                leftPadding: Units.dp(16)
             }
 
             Text {
-                width: root.width
+                width: parent.width
                 text: expression
                 font.pixelSize: Style.font.size
                 wrapMode: Text.Wrap
-                padding: Units.dp(16)
+                leftPadding: Units.dp(16)
+                rightPadding: Units.dp(16)
             }
 
-            Line { width: root.width }
+            Line { width: parent.width }
 
             Text {
                 text: qsTr("Meaning")
                 font.pixelSize: Style.smallFont.size
                 color: Style.smallFont.color
-                padding: Units.dp(16)
-                bottomPadding: 0
+                leftPadding: Units.dp(16)
             }
 
             Repeater {
@@ -50,7 +51,6 @@ Controls.Page {
                         text: "•"
                         font.pixelSize: Style.font.size
                         visible: meanings.count > 1
-                        topPadding: Units.dp(16)
                         leftPadding: Units.dp(16)
                     }
                     Text {
@@ -58,8 +58,8 @@ Controls.Page {
                         font.pixelSize: Style.font.size
                         wrapMode: Text.Wrap
                         width: root.width - Units.dp(16)
-                        padding: Units.dp(16)
-                        bottomPadding: 0
+                        leftPadding: Units.dp(16)
+                        rightPadding: Units.dp(16)
                     }
                 }
             }

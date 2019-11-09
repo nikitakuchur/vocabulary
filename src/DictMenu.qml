@@ -24,7 +24,6 @@ Controls.Menu {
         text: qsTr("Delete")
         onClicked: {
             deleteDictPopup.open();
-            /**/
         }
     }
 }

@@ -26,8 +26,8 @@ Controls.Page {
                 text: qsTr("Expression")
                 font.pixelSize: Style.smallFont.size
                 color: Style.smallFont.color
-                padding: Units.dp(16)
-                bottomPadding: 0
+                topPadding: Units.dp(16)
+                leftPadding: Units.dp(16)
             }
 
             TextField {

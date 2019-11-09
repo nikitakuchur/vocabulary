@@ -15,6 +15,7 @@ Controls.Button {
         color: "white"
         font.pixelSize: Style.font.size
         text: root.text
+        wrapMode: Text.Wrap
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         anchors.horizontalCenter: root.horizontalCenter
