@@ -33,15 +33,9 @@ EditableItemPage {
 
     onSaveButtonClicked: {
         expression = expressionText;
-        let count = Math.max(meanings.count, meaningList.count);
-        for (let i = 0; i < count; i++) {
-            if (i < meaningList.count) {
-                meanings.set(i, { meaning: meaningList.get(i).meaning });
-            } else {
-                meanings.remove(i);
-                i--;
-                count--;
-            }
+        meanings.clear();
+        for (let i = 0; i < meaningList.count; i++) {
+            meanings.append({ meaning: meaningList.get(i).meaning });
         }
         DB.update(dictList.get(currentDictIndex).id, id, expression, meanings, 0);
         stack.pop();

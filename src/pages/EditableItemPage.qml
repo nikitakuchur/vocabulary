@@ -66,7 +66,9 @@ Controls.Page {
                         Layout.rightMargin: repeater.count > 1 ? 0 : Units.dp(16)
 
                         onTextChanged: {
-                            repeater.model.get(index).meaning = text
+                            text = text.replace("_", " ");
+                            meaningList.get(index).meaning = text;
+                            //repeater.model.set(index, { meaning: text });
                         }
                     }
 
