@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
+import QtQuick.Controls.Material 2.12
 import QtQuick.Layouts 1.12
 import Style 1.0
 import Units 1.0
@@ -8,13 +9,14 @@ import "../controls"
 Controls.Page {
     property int expressionIndex: 0
     property variant meanings
+    property ListModel test
 
     id: root
     visible: false
 
     Flickable {
         anchors.fill: parent
-        contentHeight: column.height + parent.height / 2
+        contentHeight: column.height + parent.height * 0.2
         Controls.ScrollBar.vertical: Controls.ScrollBar {}
 
         Column {
@@ -48,6 +50,7 @@ Controls.Page {
             }
 
             Repeater {
+                id: repeater
                 model: meanings
                 Button {
                     text: meanings[index]
@@ -55,9 +58,27 @@ Controls.Page {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.margins: Units.dp(16)
+
+                    onClicked: {
+                        if (hasMeaning(meanings[index])) {
+                            defaultColor = Material.color(Material.Green);
+                        } else {
+                            defaultColor = Material.color(Material.Pink);
+                        }
+                        for (let i = 0; i < repeater.count; i++) {
+                            repeater.itemAt(i).enabled = false;
+                        }
+                        timer.start();
+                    }
                 }
             }
         }
+    }
+
+    Timer {
+        id: timer
+        interval: 300
+        onTriggered: stack.replace("qrc:/pages/QuizzesPage.qml")
     }
 
     onVisibleChanged: {
@@ -68,6 +89,16 @@ Controls.Page {
             meaningArray = shuffle(meaningArray);
             meanings = meaningArray;
         }
+    }
+
+    function hasMeaning(meaning) {
+        let currentMeanings = dictPage.model.get(expressionIndex).meanings;
+        for (let i = 0; i < currentMeanings.count; i++) {
+            if (currentMeanings.get(i).meaning === meaning) {
+                return true;
+            }
+        }
+        return false;
     }
 
     function getRandomInt(count) {

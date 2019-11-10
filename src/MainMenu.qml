@@ -73,7 +73,7 @@ Controls.Drawer {
             width: parent.width
             text: "Quizzes"
             font.pixelSize: Style.font.size
-            enabled: dictPage.model.count > 4
+            enabled: dictPage.model.count >= 4
             height: Style.listView.itemHeight
             leftPadding: Units.dp(16)
             onClicked: {

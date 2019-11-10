@@ -10,7 +10,7 @@ Controls.Page {
 
     Flickable {
         anchors.fill: parent
-        contentHeight: column.height + parent.height / 2
+        contentHeight: column.height + parent.height * 0.2
         Controls.ScrollBar.vertical: Controls.ScrollBar { }
 
         Column {
