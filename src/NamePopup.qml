@@ -5,7 +5,7 @@ import "controls"
 
 Popup {
     property alias text: textField.text
-    signal addButtonClicked()
+    signal okButtonClicked()
     id: popup
     width: window.width * 0.8
 
@@ -21,7 +21,7 @@ Popup {
         Button {
             text: qsTr("OK")
             Layout.fillWidth: true
-            onClicked: popup.addButtonClicked()
+            onClicked: popup.okButtonClicked()
         }
     }
 }

@@ -96,7 +96,7 @@ Controls.ApplicationWindow {
     NamePopup {
         id: addDictPopup
 
-        onAddButtonClicked: {
+        onOkButtonClicked: {
             var id = DB.createDict(text);
             dictList.append({ id: id, name: text });
             addDictPopup.close();
@@ -112,7 +112,7 @@ Controls.ApplicationWindow {
     NamePopup {
         id: editDictPopup
 
-        onAddButtonClicked: {
+        onOkButtonClicked: {
             var id = DB.renameDict(dictList.get(currentDictIndex).id, text);
             dictList.set(currentDictIndex, { name: text });
             editDictPopup.close();
