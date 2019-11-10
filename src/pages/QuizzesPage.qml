@@ -77,17 +77,14 @@ Controls.Page {
 
     Timer {
         id: timer
-        interval: 300
+        interval: 500
         onTriggered: stack.replace("qrc:/pages/QuizzesPage.qml")
     }
 
     onVisibleChanged: {
         if (visible) {
             expressionIndex = getRandomExpressionIndex();
-            let meaningArray = getRandomMeanings();
-            meaningArray.push(getRandomMeaning(expressionIndex));
-            meaningArray = shuffle(meaningArray);
-            meanings = meaningArray;
+            meanings = getRandomMeanings();
         }
     }
 
@@ -116,11 +113,16 @@ Controls.Page {
     }
 
     function getRandomMeanings() {
-        let result = [];
+        let result = [getRandomMeaning(expressionIndex)];
         for (let i = 0; i < 3; i++) {
-            result.push(getRandomMeaning(getRandomExpressionIndex()));
+            let randomMeaning = getRandomMeaning(getRandomExpressionIndex());
+            if (result.indexOf(randomMeaning) === -1) {
+                result.push(randomMeaning);
+            } else {
+                i--;
+            }
         }
-        return result;
+        return shuffle(result);
     }
 
     function shuffle(array) {

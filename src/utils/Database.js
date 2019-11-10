@@ -12,7 +12,7 @@ function init() {
 function getHandle() {
     let db;
     try {
-        db = LocalStorage.openDatabaseSync("Vocabulary_DB", "", "Vocabulary", 1000000);
+        db = LocalStorage.openDatabaseSync("Vocabulary_DB", "0.9", "Vocabulary", 1000000);
     } catch (err) {
         console.log("Error opening database: " + err);
     }
