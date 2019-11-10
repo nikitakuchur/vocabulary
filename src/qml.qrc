@@ -15,7 +15,7 @@
         <file>pages/DictPage.qml</file>
         <file>pages/AddItemPage.qml</file>
         <file>pages/EditableItemPage.qml</file>
-        <file>pages/QuizPage.qml</file>
+        <file>pages/QuizzesPage.qml</file>
         <file>pages/AboutPage.qml</file>
         <file>icons/add.svg</file>
         <file>icons/back.svg</file>

@@ -84,6 +84,5 @@ Controls.Page {
 
     EditItemPage {
         id: editItemPage
-        visible: false
     }
 }

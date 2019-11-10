@@ -10,6 +10,7 @@ import "../utils/Database.js" as DB
 
 EditableItemPage {
     expressionText: expression
+    visible: false
 
     RoundButton {
         icon.source: "../icons/clear.svg"

@@ -2,6 +2,8 @@ import QtQuick 2.12
 import "../utils/Database.js" as DB
 
 EditableItemPage {
+    visible: false
+
     onSaveButtonClicked: {
         const id = DB.insert(dictList.get(currentDictIndex).id, expressionText, meaningList, 0);
         let meanings = []

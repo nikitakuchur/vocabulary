@@ -8,20 +8,18 @@ import "../controls"
 import "../utils/Database.js" as DB
 
 Controls.Page {
-    property alias model: listModel
-
-    ListModel {
-        id: listModel
-        Component.onCompleted: {
-            if (dictList.count > 0) {
-                DB.readAll(dictList.get(currentDictIndex).id, listModel);
-            }
-        }
-    }
+    property alias model: listView.model
 
     DictListView {
         id: listView
-        model: listModel
+        model: ListModel {
+            id: listModel
+            Component.onCompleted: {
+                if (dictList.count > 0) {
+                    DB.readAll(dictList.get(currentDictIndex).id, listModel);
+                }
+            }
+        }
     }
 
     RoundButton {
@@ -41,6 +39,5 @@ Controls.Page {
 
     AddItemPage {
         id: addItemPage
-        visible: false
     }
 }
