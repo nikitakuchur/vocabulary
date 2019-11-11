@@ -6,7 +6,7 @@ import Style 1.0
 import Units 1.0
 import "../controls"
 import "quizzes"
-import "../utils/Quizzes.js" as QZ
+import "quizzes/Quizzes.js" as QZ
 
 Controls.Page {
     id: root

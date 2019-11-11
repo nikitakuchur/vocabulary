@@ -1,4 +1,4 @@
-.import "Database.js" as DB
+.import "../../utils/Database.js" as DB
 
 function hasMeaning(expression, meaning) {
     for (let val of expression.meanings) {

@@ -4,7 +4,7 @@ import QtQuick.Controls.Material 2.12
 import Units 1.0
 import Style 1.0
 import "../../controls"
-import "../../utils/Quizzes.js" as QZ
+import "Quizzes.js" as QZ
 
 Flickable {
     property string meaning: ""
@@ -55,6 +55,7 @@ Flickable {
                 anchors.margins: Units.dp(16)
 
                 onClicked: {
+                    // Check user's answer
                     if (QZ.hasMeaning(expressions[index], meaning)) {
                         defaultColor = Material.color(Material.Green);
                         QZ.increaseLevel(expressions[index]);
@@ -62,7 +63,11 @@ Flickable {
                         defaultColor = Material.color(Material.Pink);
                         QZ.decreaseLevel(expressions[index]);
                     }
+                    // Show the correct answer
                     for (let i = 0; i < repeater.count; i++) {
+                        if (QZ.hasMeaning(expressions[i], meaning)) {
+                            repeater.itemAt(i).defaultColor = Material.color(Material.Green);
+                        }
                         repeater.itemAt(i).enabled = false;
                     }
                     timer.start();

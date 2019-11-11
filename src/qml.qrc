@@ -30,6 +30,6 @@
         <file>controls/DictMenuItem.qml</file>
         <file>pages/quizzes/ExpressionQuiz.qml</file>
         <file>pages/quizzes/MeaningQuiz.qml</file>
-        <file>utils/Quizzes.js</file>
+        <file>pages/quizzes/Quizzes.js</file>
     </qresource>
 </RCC>
