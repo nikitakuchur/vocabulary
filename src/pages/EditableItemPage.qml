@@ -8,7 +8,7 @@ import "../controls"
 
 Controls.Page {
     property alias expressionText: expressionTextField.text
-    property ListModel meaningList: ListModel { ListElement { meaning: "" }}
+    property var meaningList: ListModel { ListElement { meaning: "" }}
     signal saveButtonClicked()
 
     id: root
@@ -68,7 +68,6 @@ Controls.Page {
                         onTextChanged: {
                             text = text.replace("_", " ");
                             meaningList.get(index).meaning = text;
-                            //repeater.model.set(index, { meaning: text });
                         }
                     }
 

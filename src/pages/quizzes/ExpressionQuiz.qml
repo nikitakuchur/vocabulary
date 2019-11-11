@@ -8,7 +8,7 @@ import "../../utils/Quizzes.js" as QZ
 
 Flickable {
     property string meaning: ""
-    property variant expressionIndices
+    property var expressions
 
     anchors.fill: parent
     contentHeight: column.height + parent.height * 0.2
@@ -46,19 +46,21 @@ Flickable {
 
         Repeater {
             id: repeater
-            model: expressionIndices
+            model: expressions
             Button {
-                text: dictPage.model.get(expressionIndices[index]).expression
+                text: expressions[index].expression
                 font.pixelSize: Style.font.size
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.margins: Units.dp(16)
 
                 onClicked: {
-                    if (QZ.hasMeaning(expressionIndices[index], meaning)) {
+                    if (QZ.hasMeaning(expressions[index], meaning)) {
                         defaultColor = Material.color(Material.Green);
+                        QZ.increaseLevel(expressions[index]);
                     } else {
                         defaultColor = Material.color(Material.Pink);
+                        QZ.decreaseLevel(expressions[index]);
                     }
                     for (let i = 0; i < repeater.count; i++) {
                         repeater.itemAt(i).enabled = false;
@@ -68,13 +70,16 @@ Flickable {
             }
         }
 
-        onVisibleChanged: {
-            if (visible) {
-                let randomExpressionIndex = QZ.getRandomExpressionIndex();
-                meaning = QZ.getRandomMeaning(randomExpressionIndex);
-                let array = QZ.getRandomExpressionIndicies(randomExpressionIndex, 3);
-                expressionIndices = QZ.shuffle(array);
+        Component.onCompleted: {
+            let randomExpression;
+            if (QZ.getRandomInt(2) === 0) {
+                randomExpression = QZ.getRandomExpression();
+            } else {
+                randomExpression = QZ.getRandomLowLevelExpression();
             }
+            meaning = QZ.getRandomElement(randomExpression.meanings).meaning;
+            let array = QZ.getRandomExpressions(randomExpression, 3);
+            expressions = QZ.shuffle(array);
         }
     }
 }

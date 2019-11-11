@@ -10,16 +10,11 @@ import "../utils/Database.js" as DB
 Controls.Page {
     property alias model: listView.model
 
+    visible: false
+
     DictListView {
         id: listView
-        model: ListModel {
-            id: listModel
-            Component.onCompleted: {
-                if (dictList.count > 0) {
-                    DB.readAll(dictList.get(currentDictIndex).id, listModel);
-                }
-            }
-        }
+        model: ListModel {}
     }
 
     RoundButton {
@@ -39,5 +34,19 @@ Controls.Page {
 
     AddItemPage {
         id: addItemPage
+    }
+
+    Component.onCompleted: {
+        loadDict();
+    }
+
+    function loadDict() {
+        if (dictList.count > 0) {
+            model.clear();
+            let array = DB.readAll(dictList.get(currentDictIndex).id);
+            for (let val of array) {
+                model.append(val);
+            }
+        }
     }
 }

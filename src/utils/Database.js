@@ -26,7 +26,7 @@ function createDict(name) {
         db.transaction(function (tx) {
             tx.executeSql('INSERT INTO dicts VALUES(?)', [name]);
             rowid = tx.executeSql('SELECT last_insert_rowid()').insertId;
-            tx.executeSql('CREATE TABLE IF NOT EXISTS dict' + rowid + ' (expression TEXT, meanings TEXT, level INTEGER)');
+            tx.executeSql('CREATE TABLE IF NOT EXISTS dict' + rowid + ' (expression TEXT, meanings TEXT, level REAL)');
         })
     } catch (err) {
         console.log("Error creating dict in database: " + err);
@@ -49,19 +49,19 @@ function renameDict(id, name) {
     });
 }
 
-function getDicts(model) {
+function getDicts() {
     const db = getHandle();
     let dicts = [];
-    model.clear();
     db.transaction(function (tx) {
-        let result = tx.executeSql('SELECT rowid, name FROM dicts ORDER BY rowid ASC');
+        let result = tx.executeSql('SELECT rowid, name FROM dicts ORDER BY rowid');
         for (let i = 0; i < result.rows.length; i++) {
-            model.append({
+            dicts.push({
                              id: result.rows.item(i).rowid,
                              name: result.rows.item(i).name
                          });
         }
     });
+    return dicts;
 }
 
 function insert(dictId, expression, meanings, level) {
@@ -74,13 +74,13 @@ function insert(dictId, expression, meanings, level) {
     return parseInt(rowid);
 }
 
-function readAll(dictId, model) {
-    model.clear();
+function readAll(dictId) {
     const db = getHandle();
+    let array = [];
     db.transaction(function (tx) {
-        const result = tx.executeSql('SELECT rowid, expression, meanings, level FROM dict' + dictId + ' ORDER BY rowid ASC');
+        const result = tx.executeSql('SELECT rowid, expression, meanings, level FROM dict' + dictId + ' ORDER BY rowid');
         for (let i = 0; i < result.rows.length; i++) {
-            model.append({
+            array.push({
                              id: result.rows.item(i).rowid,
                              expression: result.rows.item(i).expression,
                              meanings: stringToMeanings(result.rows.item(i).meanings),
@@ -88,6 +88,7 @@ function readAll(dictId, model) {
                          });
         }
     });
+    return array;
 }
 
 function update(dictId, id, expression, meanings, level) {
@@ -98,21 +99,36 @@ function update(dictId, id, expression, meanings, level) {
     });
 }
 
-function deleteRow(dictId, id) {
+
+
+function remove(dictId, id) {
     const db = getHandle();
     db.transaction(function (tx) {
         tx.executeSql('DELETE FROM dict' + dictId + ' WHERE rowid = ?', [id]);
     });
 }
 
+function getLowLevelExpressions(dictId) {
+    const db = getHandle();
+    let array = [];
+    db.transaction(function (tx) {
+        const minLevel = tx.executeSql('SELECT min(level) as minLevel FROM dict' + dictId).rows.item(0).minLevel;
+        const result = tx.executeSql('SELECT  rowid, expression, meanings, level FROM dict' + dictId + ' WHERE level BETWEEN ? AND ?',
+                                     [minLevel, (minLevel + 0.2)]);
+        for (let i = 0; i < result.rows.length; i++) {
+            array.push({
+                           id: result.rows.item(i).rowid,
+                           expression: result.rows.item(i).expression,
+                           meanings: stringToMeanings(result.rows.item(i).meanings),
+                           level: result.rows.item(i).level
+                       });
+        }
+    });
+    return array;
+}
+
 function meaningsToString(meanings) {
-    let str = "";
-    const separator = '__,__';
-    for (let i = 0; i < meanings.count; i++) {
-        str += meanings.get(i).meaning + separator;
-    }
-    str = str.slice(0, -separator.length);
-    return str;
+    return meanings.join('__,__');
 }
 
 function stringToMeanings(str) {

@@ -68,6 +68,12 @@ Controls.ApplicationWindow {
         id: stack
         initialItem: dictPage
         anchors.fill: parent
+
+        onCurrentItemChanged: {
+            if (currentItem == dictPage) {
+                dictPage.loadDict();
+            }
+        }
     }
 
     DictPage {
@@ -87,7 +93,10 @@ Controls.ApplicationWindow {
 
     Component.onCompleted: {
         DB.init();
-        DB.getDicts(dictList);
+        let dicts = DB.getDicts();
+        for (let dict of dicts) {
+            dictList.append(dict);
+        }
         if (dictList.count > 0) {
             currentDictIndex = 0;
         }
@@ -157,7 +166,7 @@ Controls.ApplicationWindow {
                         DB.deleteDict(dictList.get(oldIndex).id);
                         dictList.remove(oldIndex);
                         if (dictList.count > 0) {
-                            DB.readAll(dictList.get(currentDictIndex).id, dictPage.model);
+                            dictPage.loadDict();
                         } else {
                             dictPage.model.clear();
                         }

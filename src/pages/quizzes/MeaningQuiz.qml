@@ -7,8 +7,8 @@ import "../../controls"
 import "../../utils/Quizzes.js" as QZ
 
 Flickable {
-    property int expressionIndex: 0
-    property variant meanings
+    property var expression
+    property var meanings
 
     anchors.fill: parent
     contentHeight: column.height + parent.height * 0.2
@@ -28,7 +28,7 @@ Flickable {
 
         Text {
             width: root.width
-            text: dictPage.model.get(expressionIndex).expression
+            text: expression.expression
             font.pixelSize: Style.font.size
             wrapMode: Text.Wrap
             leftPadding: Units.dp(16)
@@ -55,10 +55,12 @@ Flickable {
                 anchors.margins: Units.dp(16)
 
                 onClicked: {
-                    if (QZ.hasMeaning(expressionIndex, meanings[index])) {
+                    if (QZ.hasMeaning(expression, meanings[index])) {
                         defaultColor = Material.color(Material.Green);
+                        QZ.increaseLevel(expression);
                     } else {
                         defaultColor = Material.color(Material.Pink);
+                        QZ.decreaseLevel(expression);
                     }
                     for (let i = 0; i < repeater.count; i++) {
                         repeater.itemAt(i).enabled = false;
@@ -68,12 +70,15 @@ Flickable {
             }
         }
 
-        onVisibleChanged: {
-            if (visible) {
-                expressionIndex = QZ.getRandomExpressionIndex();
-                let array = QZ.getRandomMeanings(QZ.getRandomMeaning(expressionIndex), 3);
-                meanings = QZ.shuffle(array);
+        Component.onCompleted: {
+            if (QZ.getRandomInt(2) === 0) {
+                expression = QZ.getRandomExpression();
+            } else {
+                expression = QZ.getRandomLowLevelExpression();
             }
+            let initialMeaning = QZ.getRandomElement(expression.meanings).meaning;
+            let array = QZ.getRandomMeanings(initialMeaning, 3);
+            meanings = QZ.shuffle(array);
         }
     }
 }

@@ -49,7 +49,7 @@ Controls.Drawer {
 
                 onClicked: {
                     currentDictIndex = index;
-                    DB.readAll(dictList.get(index).id, dictPage.model);
+                    dictPage.loadDict();
                     drawer.close();
                 }
             }

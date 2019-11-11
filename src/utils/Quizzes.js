@@ -1,7 +1,8 @@
-function hasMeaning(expressionIndex, meaning) {
-    let currentMeanings = dictPage.model.get(expressionIndex).meanings;
-    for (let i = 0; i < currentMeanings.count; i++) {
-        if (currentMeanings.get(i).meaning === meaning) {
+.import "Database.js" as DB
+
+function hasMeaning(expression, meaning) {
+    for (let val of expression.meanings) {
+        if (val.meaning === meaning) {
             return true;
         }
     }
@@ -12,15 +13,25 @@ function getRandomInt(count) {
     return Math.floor(Math.random() * count);
 }
 
-function getRandomExpressionIndex() {
-    return getRandomInt(dictPage.model.count);
+function getRandomElement(array) {
+    return array[getRandomInt(array.length)];
 }
 
-function getRandomExpressionIndicies(initialExpression, count) {
+function getRandomExpression() {
+    let expressions = DB.readAll(dictList.get(currentDictIndex).id);
+    return getRandomElement(expressions);
+}
+
+function getRandomLowLevelExpression() {
+    let expressions = DB.getLowLevelExpressions(dictList.get(currentDictIndex).id);
+    return getRandomElement(expressions);
+}
+
+function getRandomExpressions(initialExpression, count) {
     let result = [initialExpression];
     for (let i = 0; i < count; i++) {
-        let randomExpression = getRandomExpressionIndex();
-        if (result.indexOf(randomExpression) === -1) {
+        let randomExpression = getRandomExpression();
+        if (!hasExpression(result, randomExpression)) {
             result.push(randomExpression);
         } else {
             i--;
@@ -29,16 +40,19 @@ function getRandomExpressionIndicies(initialExpression, count) {
     return result;
 }
 
-function getRandomMeaning(expressionIndex) {
-    let meanings = dictPage.model.get(expressionIndex).meanings;
-    let randomIndex = getRandomInt(meanings.count);
-    return meanings.get(randomIndex).meaning;
+function hasExpression(expressions, expression) {
+    for (let val of expressions) {
+        if (val.expression === expression.expression) {
+            return true;
+        }
+    }
+    return false;
 }
 
 function getRandomMeanings(initialMeaning, count) {
     let result = [initialMeaning];
     for (let i = 0; i < count; i++) {
-        let randomMeaning = getRandomMeaning(getRandomExpressionIndex());
+        let randomMeaning = getRandomElement(getRandomExpression().meanings).meaning;
         if (result.indexOf(randomMeaning) === -1) {
             result.push(randomMeaning);
         } else {
@@ -54,4 +68,34 @@ function shuffle(array) {
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+}
+
+function increaseLevel(expression) {
+    expression.level += 0.1;
+    if (expression.level > 1) {
+        expression.level = 1;
+    }
+    updateExpression(expression);
+}
+
+function decreaseLevel(expression) {
+    expression.level -= 0.1;
+    if (expression.level < 0) {
+        expression.level = 0;
+    }
+    updateExpression(expression);
+}
+
+function updateExpression(expression) {
+    let meanings = [];
+    for (let val of expression.meanings) {
+        meanings.push(val.meaning)
+    }
+    DB.update(
+        dictList.get(currentDictIndex).id,
+        expression.id,
+        expression.expression,
+        meanings,
+        expression.level
+        );
 }
