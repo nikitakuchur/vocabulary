@@ -68,12 +68,6 @@ Controls.ApplicationWindow {
         id: stack
         initialItem: dictPage
         anchors.fill: parent
-
-        onCurrentItemChanged: {
-            if (currentItem == dictPage) {
-                dictPage.loadDict();
-            }
-        }
     }
 
     DictPage {

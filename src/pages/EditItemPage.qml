@@ -41,10 +41,12 @@ EditableItemPage {
         stack.pop();
     }
 
-    Component.onCompleted: {
-        meaningList.clear();
-        for (let i = 0; i < meanings.count; i++) {
-            meaningList.append({ meaning: meanings.get(i).meaning });
+    onVisibleChanged: {
+        if (visible) {
+            meaningList.clear();
+            for (let i = 0; i < meanings.count; i++) {
+                meaningList.append({ meaning: meanings.get(i).meaning });
+            }
         }
     }
 }

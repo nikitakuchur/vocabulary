@@ -25,7 +25,10 @@ Controls.Page {
     Timer {
         id: timer
         interval: 500
-        onTriggered: stack.replace("qrc:/pages/QuizzesPage.qml")
+        onTriggered: {
+            stack.replace("qrc:/pages/QuizzesPage.qml");
+            dictPage.loadDict();
+        }
     }
 
     onVisibleChanged: {
