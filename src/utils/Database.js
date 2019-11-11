@@ -128,7 +128,13 @@ function getLowLevelExpressions(dictId) {
 }
 
 function meaningsToString(meanings) {
-    return meanings.join('__,__');
+    let str = "";
+    const separator = '__,__';
+    for (let i = 0; i < meanings.count; i++) {
+        str += meanings.get(i).meaning + separator;
+    }
+    str = str.slice(0, -separator.length);
+    return str;
 }
 
 function stringToMeanings(str) {

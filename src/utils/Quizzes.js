@@ -87,9 +87,9 @@ function decreaseLevel(expression) {
 }
 
 function updateExpression(expression) {
-    let meanings = [];
+    let meanings = Qt.createQmlObject('import QtQuick 2.12; ListModel {}', parent);
     for (let val of expression.meanings) {
-        meanings.push(val.meaning)
+        meanings.append({ meaning: val.meaning });
     }
     DB.update(
         dictList.get(currentDictIndex).id,

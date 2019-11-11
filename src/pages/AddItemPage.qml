@@ -5,7 +5,7 @@ EditableItemPage {
     visible: false
 
     onSaveButtonClicked: {
-        const id = insert(expressionText, meaningList)
+        const id = DB.insert(dictList.get(currentDictIndex).id, expressionText, meaningList, 0);
         let meanings = []
         for (let i = 0; i < meaningList.count; i++) {
             meanings.push({ meaning: meaningList.get(i).meaning })
@@ -25,13 +25,5 @@ EditableItemPage {
             meaningList.clear();
             meaningList.append({ meaning: "" });
         }
-    }
-
-    function insert(expression, meanings) {
-        let meaningArray = [];
-        for (let i = 0; i < meanings.count; i++) {
-            meaningArray.push(meanings.get(i).meaning)
-        }
-        return DB.insert(dictList.get(currentDictIndex).id, expression, meaningArray, 0);
     }
 }

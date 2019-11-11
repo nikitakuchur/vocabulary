@@ -37,7 +37,7 @@ EditableItemPage {
         for (let i = 0; i < meaningList.count; i++) {
             meanings.append({ meaning: meaningList.get(i).meaning });
         }
-        update(id, expression, meanings, level);
+        DB.update(dictList.get(currentDictIndex).id, id, expression, meanings, level);
         stack.pop();
     }
 
@@ -46,13 +46,5 @@ EditableItemPage {
         for (let i = 0; i < meanings.count; i++) {
             meaningList.append({ meaning: meanings.get(i).meaning });
         }
-    }
-
-    function update(id, expression, meanings, level) {
-        let meaningArray = [];
-        for (let i = 0; i < meanings.count; i++) {
-            meaningArray.push(meanings.get(i).meaning)
-        }
-        DB.update(dictList.get(currentDictIndex).id, id, expression, meaningArray, level);
     }
 }
