@@ -27,7 +27,6 @@ EditableItemPage {
         onClicked: {
             DB.remove(dictList.get(currentDictIndex).id, id);
             dictPage.model.remove(currentItemIndex);
-            //dictPage.loadDict();
             stack.pop(dictPage);
         }
     }

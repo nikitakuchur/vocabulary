@@ -7,7 +7,7 @@ Controls.Page {
     Flickable {
         Controls.ScrollBar.vertical: Controls.ScrollBar {}
         Column {
-            spacing: Units.dp(8)
+            spacing: Units.dp(16)
             padding: Units.dp(16)
             Text {
                 text: qsTr("Vocabulary")
