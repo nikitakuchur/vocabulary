@@ -8,6 +8,7 @@ import "../utils/Database.js" as DB
 
 ListView {
     property color defaultColor: "white"
+    property int currentItemIndex: 0
 
     id: root
     anchors.fill: parent
@@ -58,6 +59,7 @@ ListView {
             id: mouseArea
             anchors.fill: parent
             onClicked: {
+                currentItemIndex = index;
                 stack.push(itemPage);
             }
         }

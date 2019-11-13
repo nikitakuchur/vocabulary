@@ -99,8 +99,6 @@ function update(dictId, id, expression, meanings, level) {
     });
 }
 
-
-
 function remove(dictId, id) {
     const db = getHandle();
     db.transaction(function (tx) {
