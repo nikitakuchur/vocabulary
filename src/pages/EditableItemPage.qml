@@ -42,7 +42,7 @@ Controls.Page {
             Line { width: root.width }
 
             Text {
-                text: qsTr("Meaning")
+                text: meaningList.count > 1 ? qsTr("Meanings") : qsTr("Meaning")
                 font.pixelSize: Style.smallFont.size
                 color: Style.smallFont.color
                 leftPadding: Units.dp(16)

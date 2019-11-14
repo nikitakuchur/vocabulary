@@ -37,7 +37,7 @@ Controls.Page {
             Line { width: parent.width }
 
             Text {
-                text: qsTr("Meaning")
+                text: dictPage.model.count > 1 ? qsTr("Meanings") : qsTr("Meaning")
                 font.pixelSize: Style.smallFont.size
                 color: Style.smallFont.color
                 leftPadding: Units.dp(16)
